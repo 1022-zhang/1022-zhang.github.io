@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.0.2" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.0.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=6.0.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.ico?v=6.0.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.0.2" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.0.2',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '90UIA9PYRR',
+      apiKey: 'a68d6525e369114ccb560fc2bce6b99d',
+      indexName: 'personal_blog',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"开始你的搜索...","hits_empty":"没有你要找的：${query} ","hits_stats":"找到 ${hits}条结果，用时 ${time}毫秒"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  
+  <meta name="keywords" content="内存泄露,解决方案,优化,LeakCanery,Lint," />
+
+
+<meta name="description" content="前言：日常开发 代码与资源的优化必不可避，无论是为了提高代码质量还是为了提高用户留存度吾日三省吾身，今天你优化了没真实项目开发优化经历，LeakCannary与Lint 带你飞">
+<meta name="keywords" content="内存泄露,解决方案,优化,LeakCanery,Lint">
+<meta property="og:type" content="article">
+<meta property="og:title" content="应用优化与开发流程">
+<meta property="og:url" content="https://tianbozhang.coding.me/application.html">
+<meta property="og:site_name" content="1022_zhang&#39;s Blog">
+<meta property="og:description" content="前言：日常开发 代码与资源的优化必不可避，无论是为了提高代码质量还是为了提高用户留存度吾日三省吾身，今天你优化了没真实项目开发优化经历，LeakCannary与Lint 带你飞">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-01-25T01:46:25.116Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="应用优化与开发流程">
+<meta name="twitter:description" content="前言：日常开发 代码与资源的优化必不可避，无论是为了提高代码质量还是为了提高用户留存度吾日三省吾身，今天你优化了没真实项目开发优化经历，LeakCannary与Lint 带你飞">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="1022_zhang's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="canonical" href="https://tianbozhang.coding.me/application.html"/>
+
+
+  <title>应用优化与开发流程 | 1022_zhang's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<!--卖萌-->
+<script type="text/javascript" src="/js/src/custom/fake-title.js"></script>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> <div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">1022_zhang's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Talk Is Cheap ,Show Me The Code</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+  
+
+
+
+ </div>
+    </header>
+
+    
+  
+  
+  
+    <a href="https://github.com/1022-zhang" class="github-corner" target="_blank" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#222; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://tianbozhang.coding.me/application.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tianbo_zhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="1022_zhang's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">应用优化与开发流程</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-11T11:55:21+08:00">2018-01-11</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/application.html" class="leancloud_visitors" data-flag-title="应用优化与开发流程">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">3.7k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长约 </span>
+                
+                <span title="阅读时长约">0:04</span>
+			  <span class="post-meta-item-text">分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>前言：<br>日常开发 代码与资源的优化必不可避，无论是为了提高代码质量还是为了提高用户留存度<br>吾日三省吾身，今天你优化了没<br>真实项目开发优化经历，LeakCannary与Lint 带你飞</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h1><h2 id="内存泄露"><a href="#内存泄露" class="headerlink" title="内存泄露"></a>内存泄露</h2><p>最常见最严重 ：后果不限于 OutOfMemory</p>
+<p>持有Activity 与Context引用，生命周期本该短于应用生命周期，该回收的没被回收掉，导致泄露<br>检测手段：最方便leakcanary ，历史悠久的 MIT</p>
+<h3 id="Handler泄露"><a href="#Handler泄露" class="headerlink" title="Handler泄露"></a>Handler泄露</h3><p>new Handler 替换为 静态内部类</p>
+<p>将持有当前Activity或Context 对象实例化为WeakReference对象</p>
+<p>onDestory 时：<code>handler.removeAllMessageAndCallback(null)</code></p>
+<p>高级方案：不可避免的Handler仍采用静态内部类，提供CallBack,独立于使用者,避免Activity与Context直接引用</p>
+<p>更高级的方案：可以避免的Handler使用RxJava</p>
+<h3 id="单例泄露"><a href="#单例泄露" class="headerlink" title="单例泄露"></a>单例泄露</h3><p>单例对象持有的Activity 使用WeakReference 、Context 使用ApplicationContext</p>
+<p>去除不必要的Activity引用</p>
+<p>泄露不止显式的Activity 与context,一旦定义其他对象，且该对象引用了Context或Activity ,却比应用生命周期短，也会发生泄露，比如单例里使用了RecyclerView</p>
+<p>此时需要考虑使用WeakReference 持有该对象引用</p>
+<p>这时，应该想想可否将其独立出来</p>
+<h3 id="Fragment-之间静态属性引用-泄露"><a href="#Fragment-之间静态属性引用-泄露" class="headerlink" title="Fragment 之间静态属性引用 泄露"></a>Fragment 之间静态属性引用 泄露</h3><p><strong>消灭静态属性</strong></p>
+<p>静态属性会一直持有当前Activity或Context引用</p>
+<p>Fragment之间通讯可使用接口，Activity实现该接口， onAttach 将Activity转换为接口对象</p>
+<p>Activity操作Fragmeng方式不变</p>
+<p>高级方案：可使用MVVM ，ViewModel方式</p>
+<h3 id="Cursor-等游标、流的关闭"><a href="#Cursor-等游标、流的关闭" class="headerlink" title="Cursor 等游标、流的关闭"></a>Cursor 等游标、流的关闭</h3><p>数据库操作：增删改查的游标，文件、网络操作流<br>用后close</p>
+<h3 id="List"><a href="#List" class="headerlink" title="List"></a>List</h3><p>onDestory销毁List：clear </p>
+<h3 id="WebView"><a href="#WebView" class="headerlink" title="WebView"></a>WebView</h3><p>onDestory销毁WebView  ：<code>removeJavaScript;removeAllView</code><br>高级方案：多进程</p>
+<h3 id="避免原则"><a href="#避免原则" class="headerlink" title="避免原则"></a>避免原则</h3><p>尽可能保证持有的对象及时被回收，必须使用Activity的采用WeakReference,能使用ApplicationContext的不使用 当前Context<br>其他对象生命周期短于应用的，一旦持有了Context或Activity都有可能发生泄露，尽可能采用WeakReference</p>
+<h2 id="代码优化"><a href="#代码优化" class="headerlink" title="代码优化"></a>代码优化</h2><h3 id="优化的数据结构"><a href="#优化的数据结构" class="headerlink" title="优化的数据结构"></a>优化的数据结构</h3><p>HashMap 替换为SparseArray 等</p>
+<h3 id="枚举、匿名内部类、反射等"><a href="#枚举、匿名内部类、反射等" class="headerlink" title="枚举、匿名内部类、反射等"></a>枚举、匿名内部类、反射等</h3><p>减少使用</p>
+<h2 id="布局，涉及过渡绘制等"><a href="#布局，涉及过渡绘制等" class="headerlink" title="布局，涉及过渡绘制等"></a>布局，涉及过渡绘制等</h2><h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>窗体背景，多余背景，减少过渡绘制有效手段</p>
+<h3 id="过渡绘制"><a href="#过渡绘制" class="headerlink" title="过渡绘制"></a>过渡绘制</h3><p>include标签（通常用于公共布局组件）、merge（有效减少层级，但会出现不可控因素，属性失效等问题）、viewsub</p>
+<p>减少不必要的层级</p>
+<h3 id="控件优化"><a href="#控件优化" class="headerlink" title="控件优化"></a>控件优化</h3><h4 id="比较突出的："><a href="#比较突出的：" class="headerlink" title="比较突出的："></a>比较突出的：</h4><p>ImageView 与TextView 呈上下左右关系时，优先考虑<br>TextView增加drawable属性，即<code>compoundDrawable</code></p>
+<p>布局设置：<code>drawableLeft ,drawableTop, drawableRight,drawableBoottom</code><br>图片文字间距使用：<code>drawablePadding</code></p>
+<p>代码设置：<code>setCompoundDrawablesRelativeWithIntrinsicBounds(left，top,right,bottoom)</code></p>
+<h3 id="内存、网络、电池"><a href="#内存、网络、电池" class="headerlink" title="内存、网络、电池"></a>内存、网络、电池</h3><p>BitMap的回收，应用不可见的监听，减少app被系统关闭的几率</p>
+<h3 id="安装包与第三方"><a href="#安装包与第三方" class="headerlink" title="安装包与第三方"></a>安装包与第三方</h3><p>无用资源，大图，图片适配，减少不必要的图片，png替换为.9,简单图片代码实现优先</p>
+<p>lib 文件</p>
+<h2 id="开发与测试"><a href="#开发与测试" class="headerlink" title="开发与测试"></a>开发与测试</h2><h3 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h3><p>业务、实现分离<br>MVP或MVVM等<br>viewmodel<br>代码规则：命名，方法数，自解释</p>
+<p>目的：便于维护</p>
+<h1 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h1><h2 id="测试环节"><a href="#测试环节" class="headerlink" title="测试环节"></a>测试环节</h2><p>如：用例覆盖，情景覆盖，功能效果与产品需求匹配度等，数据抓取，可考虑以下方案增强</p>
+<h3 id="全员测试"><a href="#全员测试" class="headerlink" title="全员测试"></a>全员测试</h3><h4 id="开发阶段"><a href="#开发阶段" class="headerlink" title="开发阶段"></a>开发阶段</h4><p>由开发把控，确认主要流程功能完成后打包安排测试，主要为产品确认功能实现情况，及时发现问题，以免后期不断产生功能修改，耽误开发进度</p>
+<h4 id="测试阶段"><a href="#测试阶段" class="headerlink" title="测试阶段"></a>测试阶段</h4><p>除测试外所有相关人员，包括但不限于：前后端开发、产品、项目负责人</p>
+<h4 id="上线前"><a href="#上线前" class="headerlink" title="上线前"></a>上线前</h4><p>最后的问题发现修改阶段，也是最后的问题修改阶段，避免上线前后发生重大问题</p>
+<h3 id="测试次数"><a href="#测试次数" class="headerlink" title="测试次数"></a>测试次数</h3><p>问题修改完一批次之后统一回归，可分为第一轮至第三轮甚至四轮，根据测试及bug情况安排，除第一轮外后续皆主要为回归，最后一轮进行线上环境测试，确认功能与稳定性，正式上线前可考虑发布小范围用户安装包进行用户实际环境测试，俗称灰度</p>
+<h3 id="测试用例"><a href="#测试用例" class="headerlink" title="测试用例"></a>测试用例</h3><p>测试拿到需求之后可编写测试用例，此用例可指导其他人进行功能验证，减少测试人员压力</p>
+<h3 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h3><p>控制bug数量，减少测试费时，尽可能的发现隐藏的问题，避免上线后发生重大事故<br>提升项目质量</p>
+<h2 id="数据监控"><a href="#数据监控" class="headerlink" title="数据监控"></a>数据监控</h2><p>抓取手法<br>可使用Charles,Fiddler等</p>
+<p>数据类问题可直接由bug测出人员定位，避免其他人浪费时间定位</p>
+<h2 id="版本分离"><a href="#版本分离" class="headerlink" title="版本分离"></a>版本分离</h2><h3 id="bug分离"><a href="#bug分离" class="headerlink" title="bug分离"></a>bug分离</h3><p>上线后的bug确认是否为重大bug是否需要修改，一旦确认可下期修改，则可列为后期版本优先修改内容</p>
+<h3 id="api数据分离"><a href="#api数据分离" class="headerlink" title="api数据分离"></a>api数据分离</h3><p>最基本的数据稳定性保持方法<br>api上线时，安装包未必会及时被上传，此时线上环境已经发生变动，而用户所用仍为老版本，一旦数据不兼容，用户无法正常使用</p>
+<p><strong>api可根据app的versioncode与平台等多参数进行数据隔离</strong></p>
+<h2 id="问题监测"><a href="#问题监测" class="headerlink" title="问题监测"></a>问题监测</h2><p>主要为稳定性服务</p>
+<p>手段包括但不限于：<br>真实用户实时崩溃日志：百度等</p>
+<p>内嵌的日志收集上传功能</p>
+<p>后台统计与收集</p>
+<p>开发阶段的崩溃收集：崩溃截取显示上传功能</p>
+<p><strong>开发阶段</strong></p>
+<p>编写高质量代码</p>
+<h2 id="性能优化手段"><a href="#性能优化手段" class="headerlink" title="性能优化手段"></a>性能优化手段</h2><p>LeakCanary 内存泄露</p>
+<p>findbug bug 、隐藏问题</p>
+<p>removed unused resoures  剔除废弃资源</p>
+<p>Lint 找出隐藏问题，优化代码，重点关注Performance 如泄露，Correctness,Security</p>
+<h3 id="内存泄露监测方法"><a href="#内存泄露监测方法" class="headerlink" title="内存泄露监测方法"></a>内存泄露监测方法</h3><p>说是监测，是因为在程序运行过程中，当发生泄露，我们的金丝雀可以直接将泄露信息dump出来<br><a href="https://github.com/square/leakcanary" target="_blank" rel="noopener">参考1:LeakCanary官网</a><br><a href="https://www.liaohuqiu.net/cn/posts/leak-canary-read-me/" target="_blank" rel="noopener">参考2:LeakCanary中文说明</a></p>
+<h4 id="Gradle配置："><a href="#Gradle配置：" class="headerlink" title="Gradle配置："></a>Gradle配置：</h4><pre><code> debugCompile &apos;com.squareup.leakcanary:leakcanary-android:1.5.4&apos;
+releaseCompile &apos;com.squareup.leakcanary:leakcanary-android-no-            op:1.5.4&apos;
+</code></pre><h4 id="Application-："><a href="#Application-：" class="headerlink" title="Application ："></a>Application ：</h4><pre><code>   /**
+ * 使用 RefWatcher 监控本该被回收的对象
+ * LeakCanary.install() 会返回一个预定义的 RefWatcher，同时也会启用一个             ActivityRefWatcher，
+ * 用于自动监控调用 Activity.onDestroy() 之后泄露的 activity。
+ * @param context
+ * @return
+ */
+public static RefWatcher getRefWatcher(Context context) {
+    Application application = (Application)                                   context.getApplicationContext();
+    return application.refWatcher;
+}
+
+private RefWatcher refWatcher;
+protected RefWatcher installLeakCanary() {
+    return RefWatcher.DISABLED;
+}
+  if (LeakCanary.isInAnalyzerProcess(this)) {
+        return;
+    }
+    refWatcher  =  LeakCanary.install(this);
+</code></pre><h4 id="Fragment"><a href="#Fragment" class="headerlink" title="Fragment"></a>Fragment</h4><pre><code>/**
+* 使用 RefWatcher 监控 Fragment
+*/
+ RefWatcher refWatcher = Application.getRefWatcher(getActivity());
+ refWatcher.watch(this);
+</code></pre><p>详细说明请参考上面贴出的参考链接</p>
+<h3 id="Lint-代码资源检测方法"><a href="#Lint-代码资源检测方法" class="headerlink" title="Lint 代码资源检测方法"></a>Lint 代码资源检测方法</h3><p><a href="http://blog.csdn.net/u011240877/article/details/54141714#%E5%9C%A8-java-%E4%BB%A3%E7%A0%81%E4%B8%AD%E5%BF%BD%E7%95%A5-lint-%E8%AD%A6%E5%91%8A" target="_blank" rel="noopener">参考</a></p>
+<p>这个工具可以提前检测出内存泄露、无用资源、以及一些不规范代码等，需要我们重点关注的点前面以及上面的参考已经详细说明</p>
+
+      
+    </div>
+	
+	
+	<!-- /noindex-->
+	<div class="post-end text-center">
+	<span ><i class="fa fa-signing fa-lg"></i>  完结撒花  <i class="fa fa-signing fa-lg"></i></span>
+	</div>
+	
+	
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>tianbo_zhang</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://tianbozhang.coding.me/application.html" title="应用优化与开发流程">https://tianbozhang.coding.me/application.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" target="_blank" rel="external nofollow">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/内存泄露/" rel="tag"><i class="fa fa-tag"> </i>内存泄露</a>
+          
+            <a href="/tags/解决方案/" rel="tag"><i class="fa fa-tag"> </i>解决方案</a>
+          
+            <a href="/tags/优化/" rel="tag"><i class="fa fa-tag"> </i>优化</a>
+          
+            <a href="/tags/LeakCanery/" rel="tag"><i class="fa fa-tag"> </i>LeakCanery</a>
+          
+            <a href="/tags/Lint/" rel="tag"><i class="fa fa-tag"> </i>Lint</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/git-learning.html" rel="next" title="Git 基础命令">
+                <i class="fa fa-chevron-left"></i> Git 基础命令
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/gradle-build-solution.html" rel="prev" title="Android Studio Gradle-Build 龟速解决方案">
+                Android Studio Gradle-Build 龟速解决方案 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+
+  
+
+
+
+
+
+ 
+	<div style="text-align:center;">
+     <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+	</div>
+ 
+ 
+  
+    <div class="comments" id="comments">
+	
+	  
+       <div id="lv-container" data-id="city" data-uid="MTAyMC8zMzM1OC85OTE0"></div>
+	  
+	 
+	  
+  
+	  
+	  
+       <div id="disqus_thread">
+         <noscript>
+           Please enable JavaScript to view the
+           <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+         </noscript>
+       </div>
+	 
+	  
+	</div>
+ 
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.png"
+                alt="tianbo_zhang" />
+            
+              <p class="site-author-name" itemprop="name">tianbo_zhang</p>
+              <p class="site-description motion-element" itemprop="description">真实，靠谱，沉淀</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    <span class="site-state-item-count">28</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/1022-zhang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://blog.csdn.net/tianbo_zhang" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://www.apkbus.com/myspaceblog-35555.html" target="_blank" title="ApkBus">
+                      
+                        <i class="fa fa-fw fa-bus"></i>ApkBus</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+<li> <a title="把这个链接拖到你的Chrome收藏夹工具栏中" href='javascript:(function() {
+	function c() {
+		var e = document.createElement("link");
+		e.setAttribute("type", "text/css");
+		e.setAttribute("rel", "stylesheet");
+		e.setAttribute("href", f);
+		e.setAttribute("class", l);
+		document.body.appendChild(e)
+	}
+ 
+	function h() {
+		var e = document.getElementsByClassName(l);
+		for (var t = 0; t < e.length; t++) {
+			document.body.removeChild(e[t])
+		}
+	}
+ 
+	function p() {
+		var e = document.createElement("div");
+		e.setAttribute("class", a);
+		document.body.appendChild(e);
+		setTimeout(function() {
+			document.body.removeChild(e)
+		}, 100)
+	}
+ 
+	function d(e) {
+		return {
+			height : e.offsetHeight,
+			width : e.offsetWidth
+		}
+	}
+ 
+	function v(i) {
+		var s = d(i);
+		return s.height > e && s.height < n && s.width > t && s.width < r
+	}
+ 
+	function m(e) {
+		var t = e;
+		var n = 0;
+		while (!!t) {
+			n += t.offsetTop;
+			t = t.offsetParent
+		}
+		return n
+	}
+ 
+	function g() {
+		var e = document.documentElement;
+		if (!!window.innerWidth) {
+			return window.innerHeight
+		} else if (e && !isNaN(e.clientHeight)) {
+			return e.clientHeight
+		}
+		return 0
+	}
+ 
+	function y() {
+		if (window.pageYOffset) {
+			return window.pageYOffset
+		}
+		return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
+	}
+ 
+	function E(e) {
+		var t = m(e);
+		return t >= w && t <= b + w
+	}
+ 
+	function S() {
+		var e = document.createElement("audio");
+		e.setAttribute("class", l);
+		e.src = i;
+		e.loop = false;
+		e.addEventListener("canplay", function() {
+			setTimeout(function() {
+				x(k)
+			}, 500);
+			setTimeout(function() {
+				N();
+				p();
+				for (var e = 0; e < O.length; e++) {
+					T(O[e])
+				}
+			}, 15500)
+		}, true);
+		e.addEventListener("ended", function() {
+			N();
+			h()
+		}, true);
+		e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";
+		document.body.appendChild(e);
+		e.play()
+	}
+ 
+	function x(e) {
+		e.className += " " + s + " " + o
+	}
+ 
+	function T(e) {
+		e.className += " " + s + " " + u[Math.floor(Math.random() * u.length)]
+	}
+ 
+	function N() {
+		var e = document.getElementsByClassName(s);
+		var t = new RegExp("\\b" + s + "\\b");
+		for (var n = 0; n < e.length; ) {
+			e[n].className = e[n].className.replace(t, "")
+		}
+	}
+ 
+	var e = 30;
+	var t = 30;
+	var n = 350;
+	var r = 350;
+	var i = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake.mp3";
+	var s = "mw-harlem_shake_me";
+	var o = "im_first";
+	var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
+	var a = "mw-strobe_light";
+	var f = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css";
+	var l = "mw_added_css";
+	var b = g();
+	var w = y();
+	var C = document.getElementsByTagName("*");
+	var k = null;
+	for (var L = 0; L < C.length; L++) {
+		var A = C[L];
+		if (v(A)) {
+			if (E(A)) {
+				k = A;
+				break
+			}
+		}
+	}
+	if (A === null) {
+		console.warn("Could not find a node of the right size. Please try a different page.");
+		return
+	}
+	c();
+	S();
+	var O = [];
+	for (var L = 0; L < C.length; L++) {
+		var A = C[L];
+		if (v(A)) {
+			O.push(A)
+		}
+	}
+})()    '>High一下</a> </li>
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#优化"><span class="nav-number">1.</span> <span class="nav-text">优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#内存泄露"><span class="nav-number">1.1.</span> <span class="nav-text">内存泄露</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Handler泄露"><span class="nav-number">1.1.1.</span> <span class="nav-text">Handler泄露</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单例泄露"><span class="nav-number">1.1.2.</span> <span class="nav-text">单例泄露</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Fragment-之间静态属性引用-泄露"><span class="nav-number">1.1.3.</span> <span class="nav-text">Fragment 之间静态属性引用 泄露</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cursor-等游标、流的关闭"><span class="nav-number">1.1.4.</span> <span class="nav-text">Cursor 等游标、流的关闭</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#List"><span class="nav-number">1.1.5.</span> <span class="nav-text">List</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WebView"><span class="nav-number">1.1.6.</span> <span class="nav-text">WebView</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#避免原则"><span class="nav-number">1.1.7.</span> <span class="nav-text">避免原则</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码优化"><span class="nav-number">1.2.</span> <span class="nav-text">代码优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#优化的数据结构"><span class="nav-number">1.2.1.</span> <span class="nav-text">优化的数据结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#枚举、匿名内部类、反射等"><span class="nav-number">1.2.2.</span> <span class="nav-text">枚举、匿名内部类、反射等</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#布局，涉及过渡绘制等"><span class="nav-number">1.3.</span> <span class="nav-text">布局，涉及过渡绘制等</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#背景"><span class="nav-number">1.3.1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#过渡绘制"><span class="nav-number">1.3.2.</span> <span class="nav-text">过渡绘制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#控件优化"><span class="nav-number">1.3.3.</span> <span class="nav-text">控件优化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#比较突出的："><span class="nav-number">1.3.3.1.</span> <span class="nav-text">比较突出的：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存、网络、电池"><span class="nav-number">1.3.4.</span> <span class="nav-text">内存、网络、电池</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装包与第三方"><span class="nav-number">1.3.5.</span> <span class="nav-text">安装包与第三方</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开发与测试"><span class="nav-number">1.4.</span> <span class="nav-text">开发与测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#架构"><span class="nav-number">1.4.1.</span> <span class="nav-text">架构</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#流程"><span class="nav-number">2.</span> <span class="nav-text">流程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#测试环节"><span class="nav-number">2.1.</span> <span class="nav-text">测试环节</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#全员测试"><span class="nav-number">2.1.1.</span> <span class="nav-text">全员测试</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#开发阶段"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">开发阶段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试阶段"><span class="nav-number">2.1.1.2.</span> <span class="nav-text">测试阶段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#上线前"><span class="nav-number">2.1.1.3.</span> <span class="nav-text">上线前</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试次数"><span class="nav-number">2.1.2.</span> <span class="nav-text">测试次数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试用例"><span class="nav-number">2.1.3.</span> <span class="nav-text">测试用例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#目的"><span class="nav-number">2.1.4.</span> <span class="nav-text">目的</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据监控"><span class="nav-number">2.2.</span> <span class="nav-text">数据监控</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#版本分离"><span class="nav-number">2.3.</span> <span class="nav-text">版本分离</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#bug分离"><span class="nav-number">2.3.1.</span> <span class="nav-text">bug分离</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#api数据分离"><span class="nav-number">2.3.2.</span> <span class="nav-text">api数据分离</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题监测"><span class="nav-number">2.4.</span> <span class="nav-text">问题监测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#性能优化手段"><span class="nav-number">2.5.</span> <span class="nav-text">性能优化手段</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#内存泄露监测方法"><span class="nav-number">2.5.1.</span> <span class="nav-text">内存泄露监测方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Gradle配置："><span class="nav-number">2.5.1.1.</span> <span class="nav-text">Gradle配置：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Application-："><span class="nav-number">2.5.1.2.</span> <span class="nav-text">Application ：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Fragment"><span class="nav-number">2.5.1.3.</span> <span class="nav-text">Fragment</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lint-代码资源检测方法"><span class="nav-number">2.5.2.</span> <span class="nav-text">Lint 代码资源检测方法</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-android fa-lg"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">tianbo_zhang</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+  <div class="footer-custom">Hosted by <a target="_blank" rel="external nofollow" href="https://pages.coding.me"><b>Coding Pages</b></a></div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      访问人数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      访问次数
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/reading_progress/reading_progress.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.0.2"></script>
+
+
+
+  
+
+  
+
+  
+    <script type="text/javascript">
+	 var disqus = {
+	 load : function disqus(){
+      var disqus_config = function () {
+        this.page.url = 'https://tianbozhang.coding.me/application.html';
+        this.page.identifier = 'application.html';
+        this.page.title = '应用优化与开发流程';
+      };
+      function loadComments () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://1022-zhang-github-io.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      }
+	  	$('#load-disqus').remove(); 
+		}
+					
+	}
+	  
+      
+        loadComments();
+      
+    </script>
+  
+
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=6.0.2"></script>
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("7PWSe3psEQIQw7VAFzGwGnPg-gzGzoHsz", "eIkVI5Pj3CJ4pkpEX3JKRL7C");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+
+  
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "middle";
+      
+          pbOptions.networks = "Weibo,Wechat,GooglePlus,Evernote";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+  <script type="text/javascript">
+  wpac_init = window.wpac_init || [];
+  wpac_init.push({widget: 'Rating', id: 9197,
+    el: 'wpac-rating',
+    color: 'fc6423'
+  });
+  (function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = '//embed.widgetpack.com/widget.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+  })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

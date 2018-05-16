@@ -1,0 +1,1526 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.0.2" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.0.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=6.0.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.ico?v=6.0.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.0.2" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.0.2',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '90UIA9PYRR',
+      apiKey: 'a68d6525e369114ccb560fc2bce6b99d',
+      indexName: 'personal_blog',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"开始你的搜索...","hits_empty":"没有你要找的：${query} ","hits_stats":"找到 ${hits}条结果，用时 ${time}毫秒"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  
+  <meta name="keywords" content="动画,android," />
+
+
+<meta name="description" content="注：除特殊说明停止维护外，列出的库仍在维护中。长时间未维护的依赖库，提供了jar文件的，可直接依赖jar 文件">
+<meta name="keywords" content="动画,android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="安卓常见动画合集">
+<meta property="og:url" content="https://tianbozhang.coding.me/android-animation-collection.html">
+<meta property="og:site_name" content="1022_zhang&#39;s Blog">
+<meta property="og:description" content="注：除特殊说明停止维护外，列出的库仍在维护中。长时间未维护的依赖库，提供了jar文件的，可直接依赖jar 文件">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.imgur.com/A5F0Q8q.png">
+<meta property="og:image" content="https://i.imgur.com/O4hnoqX.gif">
+<meta property="og:image" content="https://i.imgur.com/llJluwV.png">
+<meta property="og:image" content="https://i.imgur.com/cjHI6g3.gif">
+<meta property="og:updated_time" content="2018-05-15T06:59:01.173Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="安卓常见动画合集">
+<meta name="twitter:description" content="注：除特殊说明停止维护外，列出的库仍在维护中。长时间未维护的依赖库，提供了jar文件的，可直接依赖jar 文件">
+<meta name="twitter:image" content="https://i.imgur.com/A5F0Q8q.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="1022_zhang's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="canonical" href="https://tianbozhang.coding.me/android-animation-collection.html"/>
+
+
+  <title>安卓常见动画合集 | 1022_zhang's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<!--卖萌-->
+<script type="text/javascript" src="/js/src/custom/fake-title.js"></script>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> <div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">1022_zhang's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Talk Is Cheap ,Show Me The Code</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+  
+
+
+
+ </div>
+    </header>
+
+    
+  
+  
+  
+    <a href="https://github.com/1022-zhang" class="github-corner" target="_blank" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#222; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://tianbozhang.coding.me/android-animation-collection.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tianbo_zhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="1022_zhang's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">安卓常见动画合集</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-02T00:00:00+08:00">2018-04-02</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/android-animation-collection.html" class="leancloud_visitors" data-flag-title="安卓常见动画合集">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">15k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长约 </span>
+                
+                <span title="阅读时长约">0:15</span>
+			  <span class="post-meta-item-text">分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>注：除特殊说明停止维护外，列出的库仍在维护中。长时间未维护的依赖库，提供了jar文件的，可直接依赖jar 文件</p>
+<a id="more"></a>
+<h2 id="谷歌提供"><a href="#谷歌提供" class="headerlink" title="谷歌提供"></a>谷歌提供</h2><h3 id="属性动画3-0以上"><a href="#属性动画3-0以上" class="headerlink" title="属性动画3.0以上"></a>属性动画3.0以上</h3><h4 id="官方api自带"><a href="#官方api自带" class="headerlink" title="官方api自带"></a><a href="https://developer.android.google.cn/guide/topics/graphics/prop-animation.html" target="_blank" rel="noopener">官方api自带</a></h4><ul>
+<li>Animators:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ValueAnimator</span><br><span class="line">ObjectAnimator</span><br><span class="line">AnimatorSet</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Evaluators:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">IntEvaluator</span><br><span class="line">FloatEvaluator</span><br><span class="line">ArgbEvaluator</span><br><span class="line">TypeEvaluator</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Interpolators:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">AccelerateDecelerateInterpolator	</span><br><span class="line">AccelerateInterpolator	</span><br><span class="line">AnticipateInterpolator	</span><br><span class="line">AnticipateOvershootInterpolator	</span><br><span class="line">BounceInterpolator	</span><br><span class="line">CycleInterpolator	</span><br><span class="line">DecelerateInterpolator	</span><br><span class="line">LinearInterpolator	</span><br><span class="line">OvershootInterpolator	</span><br><span class="line">TimeInterpolator</span><br></pre></td></tr></table></figure>
+<ul>
+<li>监听：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Animator.AnimatorListener</span><br><span class="line">ValueAnimator.AnimatorUpdateListener</span><br></pre></td></tr></table></figure>
+<ul>
+<li>xml</li>
+</ul>
+<p>动画类对应标签<br><code>ValueAnimator -&gt; &lt;animator&gt;</code></p>
+<p><code>ObjectAnimator - &lt;objectAnimator&gt;</code></p>
+<p><code>AnimatorSet - &lt;set&gt;</code></p>
+<h4 id="代码-使用"><a href="#代码-使用" class="headerlink" title="代码 使用"></a>代码 使用</h4><ul>
+<li>ValueAnimator</li>
+</ul>
+<p>方法：<code>ofInt()</code>, <code>ofFloat()</code>,<code>ofObject()</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ValueAnimator animation = ValueAnimator.ofFloat(<span class="number">0f</span>, <span class="number">100f</span>);</span><br><span class="line">animation.setDuration(<span class="number">1000</span>);</span><br><span class="line">animation.start();</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ValueAnimator animation = ValueAnimator.ofObject(<span class="keyword">new</span> MyTypeEvaluator(), startPropertyValue, endPropertyValue);</span><br><span class="line">animation.setDuration(<span class="number">1000</span>);</span><br><span class="line">animation.start();</span><br></pre></td></tr></table></figure>
+<p>使用 <code>ValueAnimator</code> 对象的值</p>
+<ul>
+<li>设置<code>AnimatorUpdateListener</code> 监听</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">animation.addUpdateListener(<span class="keyword">new</span> ValueAnimator.AnimatorUpdateListener() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationUpdate</span><span class="params">(ValueAnimator updatedAnimation)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// You can use the animated value in a property that uses the</span></span><br><span class="line">        <span class="comment">// same type as the animation. In this case, you can use the</span></span><br><span class="line">        <span class="comment">// float value in the translationX property.</span></span><br><span class="line">        <span class="keyword">float</span> animatedValue = (<span class="keyword">float</span>)updatedAnimation.getAnimatedValue();</span><br><span class="line">        textView.setTranslationX(animatedValue);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>ObjectAnimator</code></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ObjectAnimator animation = ObjectAnimator.ofFloat(textView, <span class="string">"translationX"</span>, <span class="number">100f</span>);</span><br><span class="line">animation.setDuration(<span class="number">1000</span>);</span><br><span class="line">animation.start();</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ObjectAnimator.ofFloat(targetObject, <span class="string">"propName"</span>, <span class="number">1f</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>AnimatorSet</code></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">AnimatorSet bouncer = <span class="keyword">new</span> AnimatorSet();</span><br><span class="line">bouncer.play(bounceAnim).before(squashAnim1);</span><br><span class="line">bouncer.play(squashAnim1).with(squashAnim2);</span><br><span class="line">bouncer.play(squashAnim1).with(stretchAnim1);</span><br><span class="line">bouncer.play(squashAnim1).with(stretchAnim2);</span><br><span class="line">bouncer.play(bounceBackAnim).after(stretchAnim2);</span><br><span class="line">ValueAnimator fadeAnim = ObjectAnimator.ofFloat(newBall, <span class="string">"alpha"</span>, <span class="number">1f</span>, <span class="number">0f</span>);</span><br><span class="line">fadeAnim.setDuration(<span class="number">250</span>);</span><br><span class="line">AnimatorSet animatorSet = <span class="keyword">new</span> AnimatorSet();</span><br><span class="line">animatorSet.play(bouncer).before(fadeAnim);</span><br><span class="line">animatorSet.start();</span><br></pre></td></tr></table></figure>
+<h4 id="监听"><a href="#监听" class="headerlink" title="监听"></a>监听</h4><ul>
+<li><p>API：</p>
+<p><code>Animator.AnimatorListener</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">onAnimationStart()</span><br><span class="line">onAnimationEnd()</span><br><span class="line">onAnimationRepeat()</span><br><span class="line">onAnimationCancel()</span><br></pre></td></tr></table></figure>
+<p> <code>ValueAnimator.AnimatorUpdateListener</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">onAnimationUpdate()</span><br><span class="line">getAnimatedValue()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>示例： </p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ValueAnimator fadeAnim = ObjectAnimator.ofFloat(newBall, <span class="string">"alpha"</span>, <span class="number">1f</span>, <span class="number">0f</span>);</span><br><span class="line">fadeAnim.setDuration(<span class="number">250</span>);</span><br><span class="line">fadeAnim.addListener(<span class="keyword">new</span> AnimatorListenerAdapter() &#123;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationEnd</span><span class="params">(Animator animation)</span> </span>&#123;</span><br><span class="line">    balls.remove(((ObjectAnimator)animation).getTarget());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="ViewGroup"><a href="#ViewGroup" class="headerlink" title="ViewGroup"></a>ViewGroup</h4><p>API: </p>
+<p>void setAnimator(int transitionType,   Animator animator)</p>
+<p>transitionType:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">LayoutTransition.APPEARING </span><br><span class="line">LayoutTransition.CHANGE_APPEARING</span><br><span class="line">LayoutTransition.DISAPPEARING </span><br><span class="line">LayoutTransition.CHANGE_DISAPPEARING</span><br></pre></td></tr></table></figure>
+<p>需Layout布局属性支持：<code>android:animateLayoutchanges= true</code></p>
+<h4 id="View状态动画"><a href="#View状态动画" class="headerlink" title="View状态动画"></a>View状态动画</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">selector</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- the pressed state; increase x and y size to 150% --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">android:state_pressed</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">set</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">objectAnimator</span> <span class="attr">android:propertyName</span>=<span class="string">"scaleX"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:duration</span>=<span class="string">"@android:integer/config_shortAnimTime"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:valueTo</span>=<span class="string">"1.5"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:valueType</span>=<span class="string">"floatType"</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">objectAnimator</span> <span class="attr">android:propertyName</span>=<span class="string">"scaleY"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:duration</span>=<span class="string">"@android:integer/config_shortAnimTime"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:valueTo</span>=<span class="string">"1.5"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:valueType</span>=<span class="string">"floatType"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">set</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">item</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- the default, non-pressed state; set x and y size to 100% --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">android:state_pressed</span>=<span class="string">"false"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">set</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">objectAnimator</span> <span class="attr">android:propertyName</span>=<span class="string">"scaleX"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:duration</span>=<span class="string">"@android:integer/config_shortAnimTime"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:valueTo</span>=<span class="string">"1"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:valueType</span>=<span class="string">"floatType"</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">objectAnimator</span> <span class="attr">android:propertyName</span>=<span class="string">"scaleY"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:duration</span>=<span class="string">"@android:integer/config_shortAnimTime"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:valueTo</span>=<span class="string">"1"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:valueType</span>=<span class="string">"floatType"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">set</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">item</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">selector</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>布局引用： <a href="https://developer.android.google.cn/reference/android/view/View.html#attr_android:stateListAnimator" target="_blank" rel="noopener"><code>android:stateListAnimator</code></a> </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;Button android:stateListAnimator=&quot;@xml/animate_scale&quot;</span><br><span class="line">... /&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="View"><a href="#View" class="headerlink" title="View"></a>View</h4><p>API:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">translationX,translationY<span class="comment">//相对父View</span></span><br><span class="line">rotation, rotationX,  rotationY<span class="comment">//相对支点 2D: rotation ,3D旋转</span></span><br><span class="line">scaleX  scaleY <span class="comment">//相对支点 2D缩放</span></span><br><span class="line">pivotX  pivotY <span class="comment">//控制旋转，缩放支点，默认值为中间</span></span><br><span class="line">x  y <span class="comment">//相对父View 最终位置</span></span><br><span class="line">alpha<span class="comment">//View透明度 默认值1，0为完全透明</span></span><br></pre></td></tr></table></figure>
+<p>示例:</p>
+<p>创建动画，指定View属性即可</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ObjectAnimator.ofFloat(myView, <span class="string">"rotation"</span>, <span class="number">0f</span>, <span class="number">360f</span>);</span><br></pre></td></tr></table></figure>
+<h4 id="Interpolator"><a href="#Interpolator" class="headerlink" title="Interpolator"></a>Interpolator</h4><ul>
+<li><code>AccelerateDecelerateInterpolator</code></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">float</span> <span class="title">getInterpolation</span><span class="params">(<span class="keyword">float</span> input)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (<span class="keyword">float</span>)(Math.cos((input + <span class="number">1</span>) * Math.PI) / <span class="number">2.0f</span>) + <span class="number">0.5f</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>LinearInterpolator</code></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">float</span> <span class="title">getInterpolation</span><span class="params">(<span class="keyword">float</span> input)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> input;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="ViewPropertyAnimator"><a href="#ViewPropertyAnimator" class="headerlink" title="ViewPropertyAnimator"></a><code>ViewPropertyAnimator</code></h4><ul>
+<li>组合 <code>ObjectAnimator</code></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">ObjectAnimator animX = ObjectAnimator.ofFloat(myView, <span class="string">"x"</span>, <span class="number">50f</span>);</span><br><span class="line">ObjectAnimator animY = ObjectAnimator.ofFloat(myView, <span class="string">"y"</span>, <span class="number">100f</span>);</span><br><span class="line">AnimatorSet animSetXY = <span class="keyword">new</span> AnimatorSet();</span><br><span class="line">animSetXY.playTogether(animX, animY);</span><br><span class="line">animSetXY.start();</span><br></pre></td></tr></table></figure>
+<ul>
+<li>单个<code>ObjectAnimator</code></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">PropertyValuesHolder pvhX = PropertyValuesHolder.ofFloat(<span class="string">"x"</span>, <span class="number">50f</span>);</span><br><span class="line">PropertyValuesHolder pvhY = PropertyValuesHolder.ofFloat(<span class="string">"y"</span>, <span class="number">100f</span>);</span><br><span class="line">ObjectAnimator.ofPropertyValuesHolder(myView, pvhX, pvyY).start();</span><br></pre></td></tr></table></figure>
+<ul>
+<li>ViewPropertyAnimator</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">myView.animate().x(<span class="number">50f</span>).y(<span class="number">100f</span>);</span><br></pre></td></tr></table></figure>
+<h4 id="xml定义"><a href="#xml定义" class="headerlink" title="xml定义"></a>xml定义</h4><ul>
+<li><p>定义 <code>AnimatorSet</code></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">set</span> <span class="attr">android:ordering</span>=<span class="string">"sequentially"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">set</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">objectAnimator</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:propertyName</span>=<span class="string">"x"</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:duration</span>=<span class="string">"500"</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:valueTo</span>=<span class="string">"400"</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:valueType</span>=<span class="string">"intType"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">objectAnimator</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:propertyName</span>=<span class="string">"y"</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:duration</span>=<span class="string">"500"</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:valueTo</span>=<span class="string">"300"</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:valueType</span>=<span class="string">"intType"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">set</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">objectAnimator</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:propertyName</span>=<span class="string">"alpha"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:duration</span>=<span class="string">"500"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:valueTo</span>=<span class="string">"1f"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">set</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>引入<code>AnimatorSet</code></p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">AnimatorSet set = (AnimatorSet) AnimatorInflater.loadAnimator(myContext,</span><br><span class="line">    R.anim.property_animator);</span><br><span class="line">set.setTarget(myObject);</span><br><span class="line">set.start();</span><br></pre></td></tr></table></figure>
+<ul>
+<li>定义 Animator</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">animator</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:duration</span>=<span class="string">"1000"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:valueType</span>=<span class="string">"floatType"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:valueFrom</span>=<span class="string">"0f"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:valueTo</span>=<span class="string">"-100f"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>引入<code>Animator</code></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">ValueAnimator xmlAnimator = (ValueAnimator) AnimatorInflater.loadAnimator(<span class="keyword">this</span>,</span><br><span class="line">        R.animator.animator);</span><br><span class="line">xmlAnimator.addUpdateListener(<span class="keyword">new</span> ValueAnimator.AnimatorUpdateListener() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationUpdate</span><span class="params">(ValueAnimator updatedAnimation)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">float</span> animatedValue = (<span class="keyword">float</span>)updatedAnimation.getAnimatedValue();</span><br><span class="line">        textView.setTranslationX(animatedValue);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">xmlAnimator.start();</span><br></pre></td></tr></table></figure>
+<h3 id="物理动画"><a href="#物理动画" class="headerlink" title="物理动画"></a>物理动画</h3><p>官方支持库<code>support-dynamic-animation</code></p>
+<h4 id="gradle依赖"><a href="#gradle依赖" class="headerlink" title="gradle依赖"></a><code>gradle</code>依赖</h4><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">compile <span class="string">'com.android.support:support-dynamic-animation:27.1.0'</span></span><br></pre></td></tr></table></figure>
+<p>版本：<br><img src="https://i.imgur.com/A5F0Q8q.png" alt=""></p>
+<blockquote>
+<p>注：要求sdk最低版本 为16，编译版本27，功能可用情况下，可适当降低support版本及编译版本</p>
+</blockquote>
+<h4 id="api"><a href="#api" class="headerlink" title="api"></a>api</h4><p><a href="https://developer.android.com/reference/android/support/animation/DynamicAnimation.html" target="_blank" rel="noopener">官方地址</a></p>
+<ul>
+<li>接口</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DynamicAnimation.OnAnimationEndListener</span><br><span class="line">DynamicAnimation.OnAnimationUpdateListener</span><br></pre></td></tr></table></figure>
+<ul>
+<li>类</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">DynamicAnimation&lt;T extends DynamicAnimation&lt;T&gt;&gt;</span><br><span class="line">DynamicAnimation.ViewProperty</span><br><span class="line">FlingAnimation</span><br><span class="line">FloatPropertyCompat&lt;T&gt;</span><br><span class="line">FloatValueHolder</span><br><span class="line">SpringAnimation</span><br><span class="line">SpringForce</span><br></pre></td></tr></table></figure>
+<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><h2 id="开源库"><a href="#开源库" class="headerlink" title="开源库"></a>开源库</h2><h3 id="属性动画-3-0以下"><a href="#属性动画-3-0以下" class="headerlink" title="属性动画 3.0以下"></a>属性动画 3.0以下</h3><p><a href="https://github.com/JakeWharton/NineOldAndroids" target="_blank" rel="noopener">NineOldAndroids</a></p>
+<blockquote>
+<p>注：已停止更新</p>
+</blockquote>
+<h4 id="gradle依赖-1"><a href="#gradle依赖-1" class="headerlink" title="gradle依赖"></a>gradle依赖</h4><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">compile <span class="string">'com.nineoldandroids:library:2.4.0'</span></span><br></pre></td></tr></table></figure>
+<h4 id="jar-依赖"><a href="#jar-依赖" class="headerlink" title="jar 依赖"></a>jar 依赖</h4><p>将jar包：<code>nineoldandroids-2.4.0.jar</code> 置于libs目录</p>
+<h4 id="使用-1"><a href="#使用-1" class="headerlink" title="使用"></a>使用</h4><p>与官方属性动画api使用方式一致</p>
+<h3 id="加载动画"><a href="#加载动画" class="headerlink" title="加载动画"></a>加载动画</h3><h4 id="ZLoading"><a href="#ZLoading" class="headerlink" title="ZLoading"></a><a href="https://github.com/zyao89/ZLoading" target="_blank" rel="noopener">ZLoading</a></h4><blockquote>
+<p>源码支持api 15及以上，14及以下需手动变更，功能无影响</p>
+</blockquote>
+<h5 id="gradle依赖-2"><a href="#gradle依赖-2" class="headerlink" title="gradle依赖"></a>gradle依赖</h5><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">compile <span class="string">'com.zyao89:zloading:1.0.11'</span></span><br></pre></td></tr></table></figure>
+<h5 id="使用-2"><a href="#使用-2" class="headerlink" title="使用"></a>使用</h5><ul>
+<li>xml</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">com.zyao89.view.zloading.ZLoadingView</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">app:z_type</span>=<span class="string">"CircleBuilder"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">app:z_color</span>=<span class="string">"@color/colorAccent"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>代码：<code>ZLoadingView</code></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ZLoadingView zLoadingView = (ZLoadingView) findViewById(R.id.loadingView_1);</span><br><span class="line">zLoadingView.setLoadingBuilder(Z_TYPE.CIRCLE);<span class="comment">//设置类型</span></span><br><span class="line">zLoadingView.setColorFilter(Color.WHITE);<span class="comment">//设置颜色</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>Dialog：<code>ZLoadingDialog</code></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ZLoadingDialog dialog = <span class="keyword">new</span> ZLoadingDialog(MainActivity.<span class="keyword">this</span>);</span><br><span class="line">dialog.setLoadingBuilder(type)<span class="comment">//设置类型</span></span><br><span class="line">        .setLoadingColor(Color.BLACK)<span class="comment">//颜色</span></span><br><span class="line">        .setHintText(<span class="string">"Loading..."</span>)</span><br><span class="line">        .setHintTextSize(<span class="number">16</span>) <span class="comment">// 设置字体大小 dp</span></span><br><span class="line">        .setHintTextColor(Color.GRAY)  <span class="comment">// 设置字体颜色</span></span><br><span class="line">        .show();</span><br></pre></td></tr></table></figure>
+<h5 id="支持的类型"><a href="#支持的类型" class="headerlink" title="支持的类型"></a>支持的类型</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">类名			  		枚举类型			 名称</span><br><span class="line">CircleBuilder			CIRCLE			    圆</span><br><span class="line">ClockBuilder			CIRCLE_CLOCK	     计时器</span><br><span class="line">StarBuilder				STAR_LOADING		跳舞的星星</span><br><span class="line">LeafBuilder				LEAF_ROTATE			旋转的叶子</span><br><span class="line">DoubleCircleBuilder		DOUBLE_CIRCLE		 画两个圈圈</span><br><span class="line">PacManBuilder			PAC_MAN				PacMan</span><br><span class="line">ElasticBallBuilder		ELASTIC_BALL		颤抖吧！球球</span><br><span class="line">InfectionBallBuilder	INFECTION_BALL		感染体</span><br><span class="line">IntertwineBuilder		INTERTWINE			交织</span><br><span class="line">TextBuilder				TEXT			   文字</span><br><span class="line">SearchPathBuilder		SEARCH_PATH			搜索等待</span><br><span class="line">RotateCircleBuilder		ROTATE_CIRCLE		多圆旋转</span><br><span class="line">SingleCircleBuilder		SINGLE_CIRCLE		单圆简单动画</span><br><span class="line">SnakeCircleBuilder		SNAKE_CIRCLE		引蛇出洞</span><br><span class="line">StairsPathBuilder		STAIRS_PATH			舞动阶梯</span><br><span class="line">MusicPathBuilder		MUSIC_PATH			跳动音符</span><br><span class="line">StairsRectBuilder		STAIRS_RECT			递增方块</span><br><span class="line">ChartRectBuilder		CHART_RECT			跳动的柱状图</span><br></pre></td></tr></table></figure>
+<h5 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h5><p><img src="https://i.imgur.com/O4hnoqX.gif" alt=""></p>
+<h3 id="gif"><a href="#gif" class="headerlink" title="gif"></a>gif</h3><h4 id="airbnb-lottie-android"><a href="#airbnb-lottie-android" class="headerlink" title="airbnb-lottie-android"></a><a href="https://github.com/airbnb/lottie-android" target="_blank" rel="noopener">airbnb-lottie-android</a></h4><p>支持动画json文件解析,canvas绘制动画</p>
+<h5 id="gradle依赖-3"><a href="#gradle依赖-3" class="headerlink" title="gradle依赖"></a>gradle依赖</h5><blockquote>
+<p>使用latest.integration依赖最新版本</p>
+</blockquote>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">compile <span class="string">'com.airbnb.android:lottie:latest.integration'</span></span><br></pre></td></tr></table></figure>
+<h5 id="使用-3"><a href="#使用-3" class="headerlink" title="使用"></a>使用</h5><ul>
+<li>xml</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">com.airbnb.lottie.LottieAnimationView</span>  </span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">"@+id/animation_view"</span>  </span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span>  </span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span>  </span></span><br><span class="line"><span class="tag">        <span class="attr">app:lottie_fileName</span>=<span class="string">"hello-world.json"</span>  </span></span><br><span class="line"><span class="tag">        <span class="attr">app:lottie_loop</span>=<span class="string">"true"</span>  </span></span><br><span class="line"><span class="tag">        <span class="attr">app:lottie_autoPlay</span>=<span class="string">"true"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>代码</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">LottieAnimationView animationView = (LottieAnimationView) findViewById(R.id.animation_view);  </span><br><span class="line">animationView.setAnimation(<span class="string">"hello-world.json"</span>);  </span><br><span class="line">animationView.loop(<span class="keyword">true</span>);  </span><br><span class="line">animationView.playAnimation();</span><br></pre></td></tr></table></figure>
+<h4 id="android-gif-drawable"><a href="#android-gif-drawable" class="headerlink" title="android-gif-drawable"></a><a href="https://github.com/koral--/android-gif-drawable" target="_blank" rel="noopener">android-gif-drawable</a></h4><blockquote>
+<p>源码编译需ndk支持</p>
+</blockquote>
+<p>Android studio 插件：</p>
+<p><img src="https://i.imgur.com/llJluwV.png" alt=""><br>支持gif格式,最低支持api版本：14</p>
+<h5 id="gradle依赖-4"><a href="#gradle依赖-4" class="headerlink" title="gradle依赖"></a>gradle依赖</h5><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">compile <span class="string">'pl.droidsonroids.gif:android-gif-drawable:1.2.12'</span></span><br></pre></td></tr></table></figure>
+<p>如果依赖失败，在项目 gradle内配置：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">buildscript &#123;</span><br><span class="line">    repositories &#123;</span><br><span class="line">        mavenCentral()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">allprojects &#123;</span><br><span class="line">    repositories &#123;</span><br><span class="line">        mavenCentral()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h5><ol>
+<li>xml</li>
+</ol>
+<p><code>ImageView</code></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">pl.droidsonroids.gif.GifImageView</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:src</span>=<span class="string">"@drawable/src_anim"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:background</span>=<span class="string">"@drawable/bg_anim"</span></span></span><br><span class="line"><span class="tag">    /&gt;</span></span><br></pre></td></tr></table></figure>
+<p><code>TextView</code></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">pl.droidsonroids.gif.GifTextView</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:drawableTop</span>=<span class="string">"@drawable/left_anim"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:drawableStart</span>=<span class="string">"@drawable/left_anim"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:background</span>=<span class="string">"@drawable/bg_anim"</span></span></span><br><span class="line"><span class="tag">    /&gt;</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>代码</li>
+</ol>
+<p><code>GifImageViwe</code>, <code>GifImageButton</code> ,<code>GifTextView</code> </p>
+<p>支持<code>setImageResource(int resId)</code>，<code>setBackgroundResource(int resId)</code>动态设置gif图片资源</p>
+<p><code>GifDrawable</code>:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//asset file</span></span><br><span class="line">GifDrawable gifFromAssets = <span class="keyword">new</span> GifDrawable( getAssets(), <span class="string">"anim.gif"</span> );</span><br><span class="line">		</span><br><span class="line"><span class="comment">//resource (drawable or raw)</span></span><br><span class="line">GifDrawable gifFromResource = <span class="keyword">new</span> GifDrawable( getResources(), R.drawable.anim );</span><br><span class="line">		</span><br><span class="line"><span class="comment">//Uri</span></span><br><span class="line">ContentResolver contentResolver = ... <span class="comment">//can be null for file:// Uris</span></span><br><span class="line">GifDrawable gifFromUri = <span class="keyword">new</span> GifDrawable( contentResolver, gifUri );</span><br><span class="line"></span><br><span class="line"><span class="comment">//byte array</span></span><br><span class="line"><span class="keyword">byte</span>[] rawGifBytes = ...</span><br><span class="line">GifDrawable gifFromBytes = <span class="keyword">new</span> GifDrawable( rawGifBytes );</span><br><span class="line">		</span><br><span class="line"><span class="comment">//FileDescriptor</span></span><br><span class="line">FileDescriptor fd = <span class="keyword">new</span> RandomAccessFile( <span class="string">"/path/anim.gif"</span>, <span class="string">"r"</span> ).getFD();</span><br><span class="line">GifDrawable gifFromFd = <span class="keyword">new</span> GifDrawable( fd );</span><br><span class="line">		</span><br><span class="line"><span class="comment">//file path</span></span><br><span class="line">GifDrawable gifFromPath = <span class="keyword">new</span> GifDrawable( <span class="string">"/path/anim.gif"</span> );</span><br><span class="line">		</span><br><span class="line"><span class="comment">//file</span></span><br><span class="line">File gifFile = <span class="keyword">new</span> File(getFilesDir(),<span class="string">"anim.gif"</span>);</span><br><span class="line">GifDrawable gifFromFile = <span class="keyword">new</span> GifDrawable(gifFile);</span><br><span class="line">		</span><br><span class="line"><span class="comment">//AssetFileDescriptor</span></span><br><span class="line">AssetFileDescriptor afd = getAssets().openFd( <span class="string">"anim.gif"</span> );</span><br><span class="line">GifDrawable gifFromAfd = <span class="keyword">new</span> GifDrawable( afd );</span><br><span class="line">				</span><br><span class="line"><span class="comment">//InputStream (it must support marking)</span></span><br><span class="line">InputStream sourceIs = ...</span><br><span class="line">BufferedInputStream bis = <span class="keyword">new</span> BufferedInputStream( sourceIs, GIF_LENGTH );</span><br><span class="line">GifDrawable gifFromStream = <span class="keyword">new</span> GifDrawable( bis );</span><br><span class="line">		</span><br><span class="line"><span class="comment">//direct ByteBuffer</span></span><br><span class="line">ByteBuffer rawGifBytes = ...</span><br><span class="line">GifDrawable gifFromBytes = <span class="keyword">new</span> GifDrawable( rawGifBytes );</span><br></pre></td></tr></table></figure>
+<h5 id="gif控制"><a href="#gif控制" class="headerlink" title="gif控制"></a>gif控制</h5><p><a href="http://developer.android.com/reference/android/widget/MediaController.html" target="_blank" rel="noopener">MediaController</a> </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">    GifImageButton gib = <span class="keyword">new</span> GifImageButton(<span class="keyword">this</span>);</span><br><span class="line">    setContentView(gib);</span><br><span class="line">    gib.setImageResource(R.drawable.sample);</span><br><span class="line">    <span class="keyword">final</span> MediaController mc = <span class="keyword">new</span> MediaController(<span class="keyword">this</span>);</span><br><span class="line">    mc.setMediaPlayer((GifDrawable) gib.getDrawable());</span><br><span class="line">    mc.setAnchorView(gib);</span><br><span class="line">    gib.setOnClickListener(<span class="keyword">new</span> OnClickListener() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</span><br><span class="line">            mc.show();</span><br><span class="line">        &#125;</span><br><span class="line">   &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">getLoopCount()<span class="comment">//循环次数</span></span><br><span class="line">getNumberOfFrames()<span class="comment">//返回帧数，至少1帧</span></span><br><span class="line">getComment()<span class="comment">// 注释文本</span></span><br><span class="line">getFrameByteCount()<span class="comment">//可用于存储单帧像素最小字节数</span></span><br><span class="line">getAllocationByteCount()<span class="comment">//GifDrawable用于存储像素的已分配内存的大小(以字节为单位)</span></span><br><span class="line">getInputSourceByteCount()<span class="comment">//后备输入数据的长度(字节)</span></span><br><span class="line">toString()<span class="comment">//调试用的，图像大小和帧数的信息</span></span><br></pre></td></tr></table></figure>
+<h5 id="回调"><a href="#回调" class="headerlink" title="回调"></a>回调</h5><p>MultiCallback </p>
+<p>支持的功能：</p>
+<p>recycle() 释放内存</p>
+<p>isRecycled() </p>
+<p>getError() 返回错误详细内容</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">MultiCallback multiCallback = <span class="keyword">new</span> MultiCallback();</span><br><span class="line"></span><br><span class="line">imageView.setImageDrawable(gifDrawable);</span><br><span class="line">multiCallback.addView(imageView);</span><br><span class="line"></span><br><span class="line">anotherImageView.setImageDrawable(gifDrawable);</span><br><span class="line">multiCallback.addView(anotherImageView);</span><br><span class="line"></span><br><span class="line">gifDrawable.setCallback(multiCallback);</span><br></pre></td></tr></table></figure>
+<h3 id="物理-弹簧动画"><a href="#物理-弹簧动画" class="headerlink" title="物理-弹簧动画"></a>物理-弹簧动画</h3><blockquote>
+<p>已停止维护，依赖可用</p>
+</blockquote>
+<p><a href="https://github.com/facebook/rebound" target="_blank" rel="noopener">FaceBook-Rebound</a></p>
+<h4 id="Gradle依赖"><a href="#Gradle依赖" class="headerlink" title="Gradle依赖"></a>Gradle依赖</h4><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">compile <span class="string">'com.facebook.rebound:rebound:0.3.8'</span></span><br></pre></td></tr></table></figure>
+<h4 id="jar-依赖-1"><a href="#jar-依赖-1" class="headerlink" title="jar 依赖"></a>jar 依赖</h4><p>将jar包：rebound-0.3.8.jar置于libs目录</p>
+<h4 id="API"><a href="#API" class="headerlink" title="API"></a><a href="http://facebook.github.io/rebound/javadocs/" target="_blank" rel="noopener">API</a></h4><p>类： SpringSystem</p>
+<p>方法：create</p>
+<p>监听：SpringListener ，SimpleSpringListener</p>
+<p>回调方法：<br>onSpringUpdate<br>onSpringAtRest<br>onSpringActivate<br>onSpringEndStateChange</p>
+<h4 id="官方使用示例"><a href="#官方使用示例" class="headerlink" title="官方使用示例"></a>官方使用示例</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">SpringSystem springSystem = SpringSystem.create();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Add a spring to the system.</span></span><br><span class="line">        Spring spring = springSystem.createSpring();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Add a listener to observe the motion of the spring.</span></span><br><span class="line">        spring.addListener(<span class="keyword">new</span> SimpleSpringListener() &#123;</span><br><span class="line"></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onSpringUpdate</span><span class="params">(Spring spring)</span> </span>&#123;</span><br><span class="line">                <span class="comment">// You can observe the updates in the spring</span></span><br><span class="line">                <span class="comment">// state by asking its current value in onSpringUpdate.</span></span><br><span class="line">                <span class="keyword">float</span> value = (<span class="keyword">float</span>) spring.getCurrentValue();</span><br><span class="line">                <span class="keyword">float</span> scale = <span class="number">1f</span> - (value * <span class="number">0.5f</span>);</span><br><span class="line">                targetView.setScaleX(scale);</span><br><span class="line">                targetView.setScaleY(scale);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Set the spring in motion; moving from 0 to 1</span></span><br><span class="line">        spring.setEndValue(<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="属性-动画View-Shaker"><a href="#属性-动画View-Shaker" class="headerlink" title="属性-动画View Shaker"></a>属性-动画View Shaker</h3><p> <a href="https://github.com/daimajia/AndroidViewAnimations" target="_blank" rel="noopener">AndroidViewAnimations</a></p>
+<p>内置多种动画，支持链式调用</p>
+<blockquote>
+<p>最近更新日期：2017/6</p>
+</blockquote>
+<h4 id="gradle依赖-5"><a href="#gradle依赖-5" class="headerlink" title="gradle依赖"></a>gradle依赖</h4><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">compile <span class="string">'com.daimajia.easing:library:2.0@aar'</span></span><br><span class="line">compile <span class="string">'com.daimajia.androidanimations:library:2.3@aar'</span></span><br></pre></td></tr></table></figure>
+<h4 id="API-1"><a href="#API-1" class="headerlink" title="API"></a>API</h4><p>枚举类型 Techniques，指定具体类型即可</p>
+<p>with</p>
+<p>palyOn(View target)</p>
+<h4 id="使用示例-1"><a href="#使用示例-1" class="headerlink" title="使用示例"></a>使用示例</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">YoYo.with(Techniques.Tada)</span><br><span class="line">    .duration(<span class="number">700</span>)</span><br><span class="line">    .repeat(<span class="number">5</span>)</span><br><span class="line">    .playOn(targetView);</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">YoYo.with(Techniques.Shake).playOn(targetView);</span><br></pre></td></tr></table></figure>
+<h4 id="效果-1"><a href="#效果-1" class="headerlink" title="效果"></a>效果</h4><p><img src="https://i.imgur.com/cjHI6g3.gif" alt=""></p>
+
+      
+    </div>
+	
+	
+	<!-- /noindex-->
+	<div class="post-end text-center">
+	<span ><i class="fa fa-signing fa-lg"></i>  完结撒花  <i class="fa fa-signing fa-lg"></i></span>
+	</div>
+	
+	
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>tianbo_zhang</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://tianbozhang.coding.me/android-animation-collection.html" title="安卓常见动画合集">https://tianbozhang.coding.me/android-animation-collection.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" target="_blank" rel="external nofollow">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/动画/" rel="tag"><i class="fa fa-tag"> </i>动画</a>
+          
+            <a href="/tags/android/" rel="tag"><i class="fa fa-tag"> </i>android</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/manifest-configuration-dynamic-replacement.html" rel="next" title="Manifest配置动态替换">
+                <i class="fa fa-chevron-left"></i> Manifest配置动态替换
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/minigame-screenadaptation.html" rel="prev" title="微信小游戏屏幕适配">
+                微信小游戏屏幕适配 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+
+  
+
+
+
+
+
+ 
+	<div style="text-align:center;">
+     <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+	</div>
+ 
+ 
+  
+    <div class="comments" id="comments">
+	
+	  
+       <div id="lv-container" data-id="city" data-uid="MTAyMC8zMzM1OC85OTE0"></div>
+	  
+	 
+	  
+  
+	  
+	  
+       <div id="disqus_thread">
+         <noscript>
+           Please enable JavaScript to view the
+           <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+         </noscript>
+       </div>
+	 
+	  
+	</div>
+ 
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.png"
+                alt="tianbo_zhang" />
+            
+              <p class="site-author-name" itemprop="name">tianbo_zhang</p>
+              <p class="site-description motion-element" itemprop="description">真实，靠谱，沉淀</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    <span class="site-state-item-count">28</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/1022-zhang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://blog.csdn.net/tianbo_zhang" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://www.apkbus.com/myspaceblog-35555.html" target="_blank" title="ApkBus">
+                      
+                        <i class="fa fa-fw fa-bus"></i>ApkBus</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+<li> <a title="把这个链接拖到你的Chrome收藏夹工具栏中" href='javascript:(function() {
+	function c() {
+		var e = document.createElement("link");
+		e.setAttribute("type", "text/css");
+		e.setAttribute("rel", "stylesheet");
+		e.setAttribute("href", f);
+		e.setAttribute("class", l);
+		document.body.appendChild(e)
+	}
+ 
+	function h() {
+		var e = document.getElementsByClassName(l);
+		for (var t = 0; t < e.length; t++) {
+			document.body.removeChild(e[t])
+		}
+	}
+ 
+	function p() {
+		var e = document.createElement("div");
+		e.setAttribute("class", a);
+		document.body.appendChild(e);
+		setTimeout(function() {
+			document.body.removeChild(e)
+		}, 100)
+	}
+ 
+	function d(e) {
+		return {
+			height : e.offsetHeight,
+			width : e.offsetWidth
+		}
+	}
+ 
+	function v(i) {
+		var s = d(i);
+		return s.height > e && s.height < n && s.width > t && s.width < r
+	}
+ 
+	function m(e) {
+		var t = e;
+		var n = 0;
+		while (!!t) {
+			n += t.offsetTop;
+			t = t.offsetParent
+		}
+		return n
+	}
+ 
+	function g() {
+		var e = document.documentElement;
+		if (!!window.innerWidth) {
+			return window.innerHeight
+		} else if (e && !isNaN(e.clientHeight)) {
+			return e.clientHeight
+		}
+		return 0
+	}
+ 
+	function y() {
+		if (window.pageYOffset) {
+			return window.pageYOffset
+		}
+		return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
+	}
+ 
+	function E(e) {
+		var t = m(e);
+		return t >= w && t <= b + w
+	}
+ 
+	function S() {
+		var e = document.createElement("audio");
+		e.setAttribute("class", l);
+		e.src = i;
+		e.loop = false;
+		e.addEventListener("canplay", function() {
+			setTimeout(function() {
+				x(k)
+			}, 500);
+			setTimeout(function() {
+				N();
+				p();
+				for (var e = 0; e < O.length; e++) {
+					T(O[e])
+				}
+			}, 15500)
+		}, true);
+		e.addEventListener("ended", function() {
+			N();
+			h()
+		}, true);
+		e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";
+		document.body.appendChild(e);
+		e.play()
+	}
+ 
+	function x(e) {
+		e.className += " " + s + " " + o
+	}
+ 
+	function T(e) {
+		e.className += " " + s + " " + u[Math.floor(Math.random() * u.length)]
+	}
+ 
+	function N() {
+		var e = document.getElementsByClassName(s);
+		var t = new RegExp("\\b" + s + "\\b");
+		for (var n = 0; n < e.length; ) {
+			e[n].className = e[n].className.replace(t, "")
+		}
+	}
+ 
+	var e = 30;
+	var t = 30;
+	var n = 350;
+	var r = 350;
+	var i = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake.mp3";
+	var s = "mw-harlem_shake_me";
+	var o = "im_first";
+	var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
+	var a = "mw-strobe_light";
+	var f = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css";
+	var l = "mw_added_css";
+	var b = g();
+	var w = y();
+	var C = document.getElementsByTagName("*");
+	var k = null;
+	for (var L = 0; L < C.length; L++) {
+		var A = C[L];
+		if (v(A)) {
+			if (E(A)) {
+				k = A;
+				break
+			}
+		}
+	}
+	if (A === null) {
+		console.warn("Could not find a node of the right size. Please try a different page.");
+		return
+	}
+	c();
+	S();
+	var O = [];
+	for (var L = 0; L < C.length; L++) {
+		var A = C[L];
+		if (v(A)) {
+			O.push(A)
+		}
+	}
+})()    '>High一下</a> </li>
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#谷歌提供"><span class="nav-number">1.</span> <span class="nav-text">谷歌提供</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#属性动画3-0以上"><span class="nav-number">1.1.</span> <span class="nav-text">属性动画3.0以上</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#官方api自带"><span class="nav-number">1.1.1.</span> <span class="nav-text">官方api自带</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码-使用"><span class="nav-number">1.1.2.</span> <span class="nav-text">代码 使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#监听"><span class="nav-number">1.1.3.</span> <span class="nav-text">监听</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ViewGroup"><span class="nav-number">1.1.4.</span> <span class="nav-text">ViewGroup</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#View状态动画"><span class="nav-number">1.1.5.</span> <span class="nav-text">View状态动画</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#View"><span class="nav-number">1.1.6.</span> <span class="nav-text">View</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Interpolator"><span class="nav-number">1.1.7.</span> <span class="nav-text">Interpolator</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ViewPropertyAnimator"><span class="nav-number">1.1.8.</span> <span class="nav-text">ViewPropertyAnimator</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xml定义"><span class="nav-number">1.1.9.</span> <span class="nav-text">xml定义</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#物理动画"><span class="nav-number">1.2.</span> <span class="nav-text">物理动画</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#gradle依赖"><span class="nav-number">1.2.1.</span> <span class="nav-text">gradle依赖</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#api"><span class="nav-number">1.2.2.</span> <span class="nav-text">api</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用"><span class="nav-number">1.2.3.</span> <span class="nav-text">使用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开源库"><span class="nav-number">2.</span> <span class="nav-text">开源库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#属性动画-3-0以下"><span class="nav-number">2.1.</span> <span class="nav-text">属性动画 3.0以下</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#gradle依赖-1"><span class="nav-number">2.1.1.</span> <span class="nav-text">gradle依赖</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#jar-依赖"><span class="nav-number">2.1.2.</span> <span class="nav-text">jar 依赖</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用-1"><span class="nav-number">2.1.3.</span> <span class="nav-text">使用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加载动画"><span class="nav-number">2.2.</span> <span class="nav-text">加载动画</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ZLoading"><span class="nav-number">2.2.1.</span> <span class="nav-text">ZLoading</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#gradle依赖-2"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">gradle依赖</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#使用-2"><span class="nav-number">2.2.1.2.</span> <span class="nav-text">使用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#支持的类型"><span class="nav-number">2.2.1.3.</span> <span class="nav-text">支持的类型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#效果"><span class="nav-number">2.2.1.4.</span> <span class="nav-text">效果</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gif"><span class="nav-number">2.3.</span> <span class="nav-text">gif</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#airbnb-lottie-android"><span class="nav-number">2.3.1.</span> <span class="nav-text">airbnb-lottie-android</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#gradle依赖-3"><span class="nav-number">2.3.1.1.</span> <span class="nav-text">gradle依赖</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#使用-3"><span class="nav-number">2.3.1.2.</span> <span class="nav-text">使用</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#android-gif-drawable"><span class="nav-number">2.3.2.</span> <span class="nav-text">android-gif-drawable</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#gradle依赖-4"><span class="nav-number">2.3.2.1.</span> <span class="nav-text">gradle依赖</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#使用示例"><span class="nav-number">2.3.2.2.</span> <span class="nav-text">使用示例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#gif控制"><span class="nav-number">2.3.2.3.</span> <span class="nav-text">gif控制</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#回调"><span class="nav-number">2.3.2.4.</span> <span class="nav-text">回调</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#物理-弹簧动画"><span class="nav-number">2.4.</span> <span class="nav-text">物理-弹簧动画</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Gradle依赖"><span class="nav-number">2.4.1.</span> <span class="nav-text">Gradle依赖</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#jar-依赖-1"><span class="nav-number">2.4.2.</span> <span class="nav-text">jar 依赖</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#API"><span class="nav-number">2.4.3.</span> <span class="nav-text">API</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#官方使用示例"><span class="nav-number">2.4.4.</span> <span class="nav-text">官方使用示例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#属性-动画View-Shaker"><span class="nav-number">2.5.</span> <span class="nav-text">属性-动画View Shaker</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#gradle依赖-5"><span class="nav-number">2.5.1.</span> <span class="nav-text">gradle依赖</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#API-1"><span class="nav-number">2.5.2.</span> <span class="nav-text">API</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用示例-1"><span class="nav-number">2.5.3.</span> <span class="nav-text">使用示例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#效果-1"><span class="nav-number">2.5.4.</span> <span class="nav-text">效果</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-android fa-lg"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">tianbo_zhang</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+  <div class="footer-custom">Hosted by <a target="_blank" rel="external nofollow" href="https://pages.coding.me"><b>Coding Pages</b></a></div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      访问人数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      访问次数
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/reading_progress/reading_progress.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.0.2"></script>
+
+
+
+  
+
+  
+
+  
+    <script type="text/javascript">
+	 var disqus = {
+	 load : function disqus(){
+      var disqus_config = function () {
+        this.page.url = 'https://tianbozhang.coding.me/android-animation-collection.html';
+        this.page.identifier = 'android-animation-collection.html';
+        this.page.title = '安卓常见动画合集';
+      };
+      function loadComments () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://1022-zhang-github-io.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      }
+	  	$('#load-disqus').remove(); 
+		}
+					
+	}
+	  
+      
+        loadComments();
+      
+    </script>
+  
+
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=6.0.2"></script>
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("7PWSe3psEQIQw7VAFzGwGnPg-gzGzoHsz", "eIkVI5Pj3CJ4pkpEX3JKRL7C");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+
+  
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "middle";
+      
+          pbOptions.networks = "Weibo,Wechat,GooglePlus,Evernote";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+  <script type="text/javascript">
+  wpac_init = window.wpac_init || [];
+  wpac_init.push({widget: 'Rating', id: 9197,
+    el: 'wpac-rating',
+    color: 'fc6423'
+  });
+  (function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = '//embed.widgetpack.com/widget.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+  })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
