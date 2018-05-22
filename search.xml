@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[组件化方案的第三种选择之完全隔离的组件化]]></title>
+    <title><![CDATA[组件化方案的第三种选择]]></title>
     <url>%2Fthe-third-option-of-componentization-scheme.html</url>
     <content type="text"><![CDATA[背景：市面上已开源的或者已发布的组件化方案，多数都是开发阶段单一工程结构，切换module模式。本质上依然没有达到代码完全隔离的目的，开发与整合测试中的一些痛点还是没有彻底解决 我们的方案：代码完全隔离，互相只能依赖，不可编辑，各模块可以单独运行，也可组合依赖 本文内容为亲自实践并验证之后整理，理解了思路，具体实施方案其实可以有多种，最主要的是自己觉得合适的。 核心思想最大化隔离，最少代码侵入，最少修改感知 抛弃开发阶段与发布阶段gradle配置的Library与Application切换 每一个组件都是一个独立的工程，组件仍是Library，与开发阶段使用的demo分离。整体工程一并发布。最终只能有一个Application 组件互相隔离，互相不可编辑，只能使用。Library 发布为jar或aar文件，远程依赖引入 清单文件配置（所有我们知道的配置）都可以写进Library，最后打包时会自动合并，无需人为干扰。 gradle扩展配置，manifest 经常变化的配置写进gradle配置文件，减少配置侵入 业务组件之间依赖后通过路由或其他方式交互（自行选择），功能组件可直接依赖使用 涉及知识点仓库以maven为例 Library Maven 配置 搭建本地Maven仓库 Manifest动态配置替换 Gradle插件开发 组件交互：Arouter，ActivityRouter 实践理解以上所有点，一步一个脚印 组件交互方案 阿里ARouter 框架 ActivityRouter 仓库发布方式分类 jcenter maven 本地私有仓库 私有仓库搭建以下内容足够 拥抱 Android Studio 之四：Maven 仓库使用与私有仓库搭建在Android Studio中发布Library到jCenter公共仓库自建私有Maven 仓库]]></content>
       <categories>
@@ -9,8 +9,8 @@
         <category>组件化</category>
       </categories>
       <tags>
-        <tag>总结</tag>
         <tag>实战</tag>
+        <tag>总结</tag>
         <tag>组件化</tag>
         <tag>进阶</tag>
       </tags>
@@ -85,8 +85,8 @@
       <tags>
         <tag>博客</tag>
         <tag>Hexo</tag>
-        <tag>Next</tag>
         <tag>实战</tag>
+        <tag>Next</tag>
       </tags>
   </entry>
   <entry>
@@ -98,11 +98,11 @@
         <category>Hexo</category>
       </categories>
       <tags>
-        <tag>Git</tag>
         <tag>博客</tag>
+        <tag>Git</tag>
         <tag>Hexo</tag>
-        <tag>实战</tag>
         <tag>Node.js</tag>
+        <tag>实战</tag>
         <tag>高级</tag>
       </tags>
   </entry>
@@ -115,11 +115,11 @@
         <category>Hexo</category>
       </categories>
       <tags>
-        <tag>Git</tag>
         <tag>博客</tag>
+        <tag>Git</tag>
         <tag>Hexo</tag>
-        <tag>实战</tag>
         <tag>Node.js</tag>
+        <tag>实战</tag>
         <tag>高级</tag>
       </tags>
   </entry>
@@ -132,11 +132,11 @@
         <category>Hexo</category>
       </categories>
       <tags>
-        <tag>Git</tag>
         <tag>博客</tag>
+        <tag>Git</tag>
         <tag>Hexo</tag>
-        <tag>实战</tag>
         <tag>Node.js</tag>
+        <tag>实战</tag>
         <tag>中级</tag>
       </tags>
   </entry>
@@ -149,11 +149,11 @@
         <category>Hexo</category>
       </categories>
       <tags>
-        <tag>Git</tag>
         <tag>博客</tag>
+        <tag>Git</tag>
         <tag>Hexo</tag>
-        <tag>实战</tag>
         <tag>Node.js</tag>
+        <tag>实战</tag>
         <tag>初级</tag>
       </tags>
   </entry>
@@ -196,8 +196,8 @@
       </categories>
       <tags>
         <tag>Git</tag>
-        <tag>基础</tag>
         <tag>总结</tag>
+        <tag>基础</tag>
       </tags>
   </entry>
   <entry>
