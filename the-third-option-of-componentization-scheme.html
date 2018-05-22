@@ -111,21 +111,28 @@
 
 
   
-  <meta name="keywords" content="实战,总结,组件化,进阶," />
+  <meta name="keywords" content="总结,实战,组件化,进阶," />
 
 
 <meta name="description" content="背景：市面上已开源的或者已发布的组件化方案，多数都是开发阶段单一工程结构，切换module模式。本质上依然没有达到代码完全隔离的目的，开发与整合测试中的一些痛点还是没有彻底解决 我们的方案：代码完全隔离，互相只能依赖，不可编辑，各模块可以单独运行，也可组合依赖 本文内容为亲自实践并验证之后整理，理解了思路，具体实施方案其实可以有多种，最主要的是自己觉得合适的。">
-<meta name="keywords" content="实战,总结,组件化,进阶">
+<meta name="keywords" content="总结,实战,组件化,进阶">
 <meta property="og:type" content="article">
 <meta property="og:title" content="组件化方案的第三种选择">
 <meta property="og:url" content="https://tianbozhang.coding.me/the-third-option-of-componentization-scheme.html">
 <meta property="og:site_name" content="1022_zhang&#39;s Blog">
 <meta property="og:description" content="背景：市面上已开源的或者已发布的组件化方案，多数都是开发阶段单一工程结构，切换module模式。本质上依然没有达到代码完全隔离的目的，开发与整合测试中的一些痛点还是没有彻底解决 我们的方案：代码完全隔离，互相只能依赖，不可编辑，各模块可以单独运行，也可组合依赖 本文内容为亲自实践并验证之后整理，理解了思路，具体实施方案其实可以有多种，最主要的是自己觉得合适的。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-22T03:55:24.510Z">
+<meta property="og:image" content="https://i.imgur.com/l5Bmdw0.png">
+<meta property="og:image" content="https://i.imgur.com/G4TJqEx.png">
+<meta property="og:image" content="https://i.imgur.com/im44eWX.png">
+<meta property="og:image" content="https://i.imgur.com/DGWVeEf.png">
+<meta property="og:image" content="https://i.imgur.com/LgjfA1r.png">
+<meta property="og:image" content="https://i.imgur.com/aj9Nrgk.png">
+<meta property="og:updated_time" content="2018-05-22T04:33:37.958Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="组件化方案的第三种选择">
 <meta name="twitter:description" content="背景：市面上已开源的或者已发布的组件化方案，多数都是开发阶段单一工程结构，切换module模式。本质上依然没有达到代码完全隔离的目的，开发与整合测试中的一些痛点还是没有彻底解决 我们的方案：代码完全隔离，互相只能依赖，不可编辑，各模块可以单独运行，也可组合依赖 本文内容为亲自实践并验证之后整理，理解了思路，具体实施方案其实可以有多种，最主要的是自己觉得合适的。">
+<meta name="twitter:image" content="https://i.imgur.com/l5Bmdw0.png">
 
 
 
@@ -400,7 +407,7 @@
                 
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="字数统计">789</span>
+                <span title="字数统计">3.1k</span>
               
 
               
@@ -414,7 +421,7 @@
                 
                   <span class="post-meta-item-text">阅读时长约 </span>
                 
-                <span title="阅读时长约">0:01</span>
+                <span title="阅读时长约">0:03</span>
 			  <span class="post-meta-item-text">分钟</span>
               
             </div>
@@ -439,8 +446,87 @@
 <p>我们的方案：代码完全隔离，互相只能依赖，不可编辑，各模块可以单独运行，也可组合依赖</p>
 <p>本文内容为亲自实践并验证之后整理，理解了思路，具体实施方案其实可以有多种，最主要的是自己觉得合适的。</p>
 <a id="more"></a>
-<h2 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h2><p>最大化隔离，最少代码侵入，最少修改感知</p>
+<p>先看看常见的方案</p>
+<h2 id="第一种方案-单一项目结构"><a href="#第一种方案-单一项目结构" class="headerlink" title="第一种方案-单一项目结构"></a>第一种方案-单一项目结构</h2><p>该架构模式比较大众化，很多组件化demo 都是这种结构，比如得到</p>
+<blockquote>
+<p>核心思想：所有业务组件及common组件以module形式存在于一个项目内</p>
+</blockquote>
+<p> 优点： 项目没有冗余，便于管理</p>
+<p> 缺点：没有达到组件完全隔离效果，组件插拔使用仍需新建或导入项目</p>
+<h3 id="代码结构"><a href="#代码结构" class="headerlink" title="代码结构"></a>代码结构</h3><p><img src="https://i.imgur.com/l5Bmdw0.png" alt=""></p>
+<p>解读：</p>
+<ul>
+<li><code>app</code>:项目module，无具体业务，不包含具体页面，只负责编译依赖组件、集成打包</li>
+<li><code>module_main</code>: main组件，定义启动页与主页</li>
+<li><code>module_a</code>:业务组件</li>
+<li><code>moduel_baidulocation</code>：功能组件</li>
+<li><code>module_common</code>: 基础公共组件</li>
+</ul>
+<blockquote>
+<p>各组件为独立工程架构后面说明,基本配置及思想不变</p>
+</blockquote>
+<p>组件文件结构 ：</p>
+<p><img src="https://i.imgur.com/G4TJqEx.png" alt=""></p>
+<p>由于组件以Module形式存在于项目内</p>
+<p>因此只保留Module目录文件，其他工程文件统一由主体工程提供</p>
+<h3 id="主体项目配置"><a href="#主体项目配置" class="headerlink" title="主体项目配置"></a>主体项目配置</h3><h4 id="setting-gradle配置"><a href="#setting-gradle配置" class="headerlink" title="setting.gradle配置"></a><code>setting.gradle</code>配置</h4><p><code>include</code>所有组件module</p>
+<p>如：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">include</span> <span class="string">':app'</span>,</span><br><span class="line">		<span class="string">':module_main'</span>,</span><br><span class="line">		<span class="string">':module_a'</span>, </span><br><span class="line">        <span class="string">':module_common'</span></span><br></pre></td></tr></table></figure>
+<p><code>app Module</code>配置</p>
+<h4 id="build-gradle配置"><a href="#build-gradle配置" class="headerlink" title="build.gradle配置"></a><code>build.gradle</code>配置</h4><p>始终为<code>com.android.application</code></p>
+<p>编译依赖：</p>
 <ol>
+<li>依赖底层公共组件 </li>
+<li>集成模式条件下，编译全部组件</li>
+</ol>
+<p>如：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(!isDebug.toBoolean())&#123;</span><br><span class="line">     implementation <span class="keyword">project</span>(<span class="string">':module_main'</span>)</span><br><span class="line">     implementation <span class="keyword">project</span>(<span class="string">':module_a'</span>)</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> implementation <span class="keyword">project</span>(<span class="string">':module_common'</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="调试运行"><a href="#调试运行" class="headerlink" title="调试运行"></a>调试运行</h3><p>修改<code>gradle.properties</code></p>
+<p><code>isDebug=true</code>，独立运行调试</p>
+<p><code>isDebug=false</code>，编译运行整个project</p>
+<p>组件单独运行与整个project运行切换：</p>
+<p><img src="https://i.imgur.com/im44eWX.png" alt=""></p>
+<blockquote>
+<p><strong>注意</strong>:组件间资源重复会在最终打包时发生冲突，即使通过编译成功打包，在运行时也会出现资源问题。建议增加模块前缀加以区分避免</p>
+</blockquote>
+<h2 id="第二种方案-多项目结构"><a href="#第二种方案-多项目结构" class="headerlink" title="第二种方案-多项目结构"></a>第二种方案-多项目结构</h2><blockquote>
+<p>核心思想：每个组件都做为一个独立项目存在 ,负责组合打包各组件的主项目只有一个</p>
+</blockquote>
+<p> 优点： 除公共组件或功能组件存在依赖关系外，组件间互相隔离</p>
+<p> 缺点：项目冗余</p>
+<h3 id="代码结构-1"><a href="#代码结构-1" class="headerlink" title="代码结构"></a>代码结构</h3><p><img src="https://i.imgur.com/DGWVeEf.png" alt=""></p>
+<p>解读：</p>
+<ul>
+<li><code>ComponentApp</code>为主工程，最终负责打包组件，无具体业务，<strong>只</strong>配置程序相关内容</li>
+<li><code>ComponentMain</code>为主组件，配置启动页与首页</li>
+<li><code>ComponentA</code>为业务组件</li>
+<li><code>ComponentBaidu</code> 为功能组件</li>
+<li><code>ComponentCommon</code> 为公共组件</li>
+</ul>
+<blockquote>
+<p>所有组件依赖公共组件</p>
+<p>继承<code>BaseApplication</code>, 开发时将全局Application转型为<code>BaseApplication</code>,避免打包时 Application失效</p>
+</blockquote>
+<h3 id="文件结构"><a href="#文件结构" class="headerlink" title="文件结构"></a>文件结构</h3><p><img src="https://i.imgur.com/LgjfA1r.png" alt=""></p>
+<ul>
+<li><p>具体路径按需存放</p>
+</li>
+<li><p>各组件均为独立项目</p>
+</li>
+</ul>
+<h3 id="主体项目配置-1"><a href="#主体项目配置-1" class="headerlink" title="主体项目配置"></a>主体项目配置</h3><h4 id="setting-gradle配置-1"><a href="#setting-gradle配置-1" class="headerlink" title="setting.gradle配置"></a><code>setting.gradle</code>配置</h4><p>以依赖项目与主体项目在同级目录为例：</p>
+<p>引入依赖组件，使用<code>project (&#39;:项目&#39;).projectDir = new File(&#39;../项目&#39;)</code>定义路径</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">include &apos;:app&apos;</span><br><span class="line"></span><br><span class="line">include  &apos;:ComponentMain&apos;</span><br><span class="line">project (&apos;:ComponentMain&apos;).projectDir = new File(&apos;../ComponentMain&apos;)</span><br><span class="line">include &apos;:ComponentMain:main&apos;</span><br><span class="line"></span><br><span class="line">include  &apos;:ComponentA&apos;</span><br><span class="line">project (&apos;:ComponentA&apos;).projectDir = new File(&apos;../ComponentA&apos;)</span><br><span class="line">include &apos;:ComponentA:moduleA&apos;</span><br><span class="line"></span><br><span class="line">include  &apos;:ComponentCommon&apos;</span><br><span class="line">project (&apos;:ComponentCommon&apos;).projectDir = new File(&apos;../ComponentCommon&apos;)</span><br><span class="line">include &apos;:ComponentCommon:common&apos;</span><br></pre></td></tr></table></figure>
+<h4 id="build-gradle配置-1"><a href="#build-gradle配置-1" class="headerlink" title="build.gradle配置"></a><code>build.gradle</code>配置</h4><p>编译各组件内指定<code>Module</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">if(!isDebug.toBoolean())&#123;</span><br><span class="line">      implementation project(&apos;:ComponentMain:main&apos;)</span><br><span class="line">      implementation project(&apos;:ComponentA:moduleA&apos;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  implementation project(&apos;:ComponentCommon:common&apos;)</span><br></pre></td></tr></table></figure>
+<h3 id="调试运行-1"><a href="#调试运行-1" class="headerlink" title="调试运行"></a>调试运行</h3><p>修改 <code>gradle.properties</code> 内<code>isDebug</code></p>
+<p><img src="https://i.imgur.com/aj9Nrgk.png" alt=""></p>
+<p><code>app Module</code>由于没有默认Activity，因此无法运行</p>
+<blockquote>
+<p><strong>注意:</strong>有依赖关系的组件 配置需一致，否则编译失败</p>
+</blockquote>
+<h2 id="第三种方案-彻底组件化"><a href="#第三种方案-彻底组件化" class="headerlink" title="第三种方案-彻底组件化"></a>第三种方案-彻底组件化</h2><p> 核心思想：最大化隔离，最少代码侵入，最少修改感知</p>
+<h3 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h3><ol>
 <li>抛弃开发阶段与发布阶段gradle配置的Library与Application切换</li>
 <li>每一个组件都是一个独立的工程，组件仍是Library，与开发阶段使用的demo分离。整体工程一并发布。最终只能有一个Application</li>
 <li>组件互相隔离，互相不可编辑，只能使用。Library 发布为jar或aar文件，远程依赖引入</li>
@@ -448,7 +534,7 @@
 <li>gradle扩展配置，manifest 经常变化的配置写进gradle配置文件，减少配置侵入</li>
 <li>业务组件之间依赖后通过路由或其他方式交互（自行选择），功能组件可直接依赖使用</li>
 </ol>
-<h2 id="涉及知识点"><a href="#涉及知识点" class="headerlink" title="涉及知识点"></a>涉及知识点</h2><p><em>仓库以maven为例</em></p>
+<h3 id="涉及知识点"><a href="#涉及知识点" class="headerlink" title="涉及知识点"></a>涉及知识点</h3><p><em>仓库以maven为例</em>，以下内容，搜索引擎都可解答</p>
 <ol>
 <li>Library Maven 配置</li>
 <li>搭建本地Maven仓库</li>
@@ -456,18 +542,18 @@
 <li>Gradle插件开发</li>
 <li>组件交互：Arouter，ActivityRouter</li>
 </ol>
-<h2 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h2><p>理解以上所有点，一步一个脚印</p>
-<h3 id="组件交互方案"><a href="#组件交互方案" class="headerlink" title="组件交互方案"></a>组件交互方案</h3><ul>
+<h3 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h3><p>理解以上所有点，一步一个脚印</p>
+<h4 id="组件交互方案"><a href="#组件交互方案" class="headerlink" title="组件交互方案"></a>组件交互方案</h4><ul>
 <li><a href="https://github.com/alibaba/ARouter" target="_blank" rel="noopener">阿里ARouter 框架</a></li>
 <li><a href="https://github.com/mzule/ActivityRouter" target="_blank" rel="noopener">ActivityRouter</a></li>
 </ul>
-<h3 id="仓库发布方式"><a href="#仓库发布方式" class="headerlink" title="仓库发布方式"></a>仓库发布方式</h3><h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><ul>
+<h4 id="仓库发布方式"><a href="#仓库发布方式" class="headerlink" title="仓库发布方式"></a>仓库发布方式</h4><p>分类</p>
+<ul>
 <li><code>jcenter</code></li>
 <li><code>maven</code></li>
 <li>本地私有仓库</li>
 </ul>
-<h3 id="私有仓库搭建"><a href="#私有仓库搭建" class="headerlink" title="私有仓库搭建"></a>私有仓库搭建</h3><p>以下内容足够</p>
-<p><a href="http://geek.csdn.net/news/detail/53459" target="_blank" rel="noopener">拥抱 Android Studio 之四：Maven 仓库使用与私有仓库搭建</a><br><a href="https://yangbo.tech/2015/10/19/distribute-android-library-to-jcetner/" target="_blank" rel="noopener">在Android Studio中发布Library到<code>jCenter</code>公共仓库</a><br><a href="https://www.2cto.com/kf/201701/544616.html" target="_blank" rel="noopener">自建私有Maven 仓库</a></p>
+<h5 id="私有仓库搭建"><a href="#私有仓库搭建" class="headerlink" title="私有仓库搭建"></a>私有仓库搭建</h5><p><a href="http://geek.csdn.net/news/detail/53459" target="_blank" rel="noopener">拥抱 Android Studio 之四：Maven 仓库使用与私有仓库搭建</a><br><a href="https://yangbo.tech/2015/10/19/distribute-android-library-to-jcetner/" target="_blank" rel="noopener">在Android Studio中发布Library到<code>jCenter</code>公共仓库</a><br><a href="https://www.2cto.com/kf/201701/544616.html" target="_blank" rel="noopener">自建私有Maven 仓库</a></p>
 
       
     </div>
@@ -507,9 +593,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/实战/" rel="tag"><i class="fa fa-tag"> </i>实战</a>
-          
             <a href="/tags/总结/" rel="tag"><i class="fa fa-tag"> </i>总结</a>
+          
+            <a href="/tags/实战/" rel="tag"><i class="fa fa-tag"> </i>实战</a>
           
             <a href="/tags/组件化/" rel="tag"><i class="fa fa-tag"> </i>组件化</a>
           
@@ -915,7 +1001,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#核心思想"><span class="nav-number">1.</span> <span class="nav-text">核心思想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#涉及知识点"><span class="nav-number">2.</span> <span class="nav-text">涉及知识点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实践"><span class="nav-number">3.</span> <span class="nav-text">实践</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#组件交互方案"><span class="nav-number">3.1.</span> <span class="nav-text">组件交互方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#仓库发布方式"><span class="nav-number">3.2.</span> <span class="nav-text">仓库发布方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分类"><span class="nav-number">3.3.</span> <span class="nav-text">分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#私有仓库搭建"><span class="nav-number">3.4.</span> <span class="nav-text">私有仓库搭建</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第一种方案-单一项目结构"><span class="nav-number">1.</span> <span class="nav-text">第一种方案-单一项目结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#代码结构"><span class="nav-number">1.1.</span> <span class="nav-text">代码结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主体项目配置"><span class="nav-number">1.2.</span> <span class="nav-text">主体项目配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#setting-gradle配置"><span class="nav-number">1.2.1.</span> <span class="nav-text">setting.gradle配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#build-gradle配置"><span class="nav-number">1.2.2.</span> <span class="nav-text">build.gradle配置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调试运行"><span class="nav-number">1.3.</span> <span class="nav-text">调试运行</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二种方案-多项目结构"><span class="nav-number">2.</span> <span class="nav-text">第二种方案-多项目结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#代码结构-1"><span class="nav-number">2.1.</span> <span class="nav-text">代码结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件结构"><span class="nav-number">2.2.</span> <span class="nav-text">文件结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主体项目配置-1"><span class="nav-number">2.3.</span> <span class="nav-text">主体项目配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#setting-gradle配置-1"><span class="nav-number">2.3.1.</span> <span class="nav-text">setting.gradle配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#build-gradle配置-1"><span class="nav-number">2.3.2.</span> <span class="nav-text">build.gradle配置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调试运行-1"><span class="nav-number">2.4.</span> <span class="nav-text">调试运行</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第三种方案-彻底组件化"><span class="nav-number">3.</span> <span class="nav-text">第三种方案-彻底组件化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方案"><span class="nav-number">3.1.</span> <span class="nav-text">方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#涉及知识点"><span class="nav-number">3.2.</span> <span class="nav-text">涉及知识点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实践"><span class="nav-number">3.3.</span> <span class="nav-text">实践</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#组件交互方案"><span class="nav-number">3.3.1.</span> <span class="nav-text">组件交互方案</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#仓库发布方式"><span class="nav-number">3.3.2.</span> <span class="nav-text">仓库发布方式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#私有仓库搭建"><span class="nav-number">3.3.2.1.</span> <span class="nav-text">私有仓库搭建</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>
