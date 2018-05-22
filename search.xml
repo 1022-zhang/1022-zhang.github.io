@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[组件化方案的第三种选择之完全隔离的组件化]]></title>
+    <url>%2Fthe-third-option-of-componentization-scheme.html</url>
+    <content type="text"><![CDATA[背景：市面上已开源的或者已发布的组件化方案，多数都是开发阶段单一工程结构，切换module模式。本质上依然没有达到代码完全隔离的目的，开发与整合测试中的一些痛点还是没有彻底解决 我们的方案：代码完全隔离，互相只能依赖，不可编辑，各模块可以单独运行，也可组合依赖 本文内容为亲自实践并验证之后整理，理解了思路，具体实施方案其实可以有多种，最主要的是自己觉得合适的。 核心思想最大化隔离，最少代码侵入，最少修改感知 抛弃开发阶段与发布阶段gradle配置的Library与Application切换 每一个组件都是一个独立的工程，组件仍是Library，与开发阶段使用的demo分离。整体工程一并发布。最终只能有一个Application 组件互相隔离，互相不可编辑，只能使用。Library 发布为jar或aar文件，远程依赖引入 清单文件配置（所有我们知道的配置）都可以写进Library，最后打包时会自动合并，无需人为干扰。 gradle扩展配置，manifest 经常变化的配置写进gradle配置文件，减少配置侵入 业务组件之间依赖后通过路由或其他方式交互（自行选择），功能组件可直接依赖使用 涉及知识点仓库以maven为例 Library Maven 配置 搭建本地Maven仓库 Manifest动态配置替换 Gradle插件开发 组件交互：Arouter，ActivityRouter 实践理解以上所有点，一步一个脚印 组件交互方案 阿里ARouter 框架 ActivityRouter 仓库发布方式分类 jcenter maven 本地私有仓库 私有仓库搭建以下内容足够 拥抱 Android Studio 之四：Maven 仓库使用与私有仓库搭建在Android Studio中发布Library到jCenter公共仓库自建私有Maven 仓库]]></content>
+      <categories>
+        <category>android</category>
+        <category>组件化</category>
+      </categories>
+      <tags>
+        <tag>总结</tag>
+        <tag>实战</tag>
+        <tag>组件化</tag>
+        <tag>进阶</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[自定义Gradle插件，之扩展Gradle配置]]></title>
     <url>%2Fgradle-custom-configuration.html</url>
     <content type="text"><![CDATA[把一些经常变化的配置放在Gradle内，达到变化时只修改Gradle文件，不去动其他文件，减少出错的概率目的参考ShareSDK 的项目配置思路，实现我们自己的Gradle扩展配置 注：暂不涉及Gradle配置对象直间的值传递方案 结构 实现方案 插件定义：`plugin-custom.properties 文件： 1implementation-class = com.company.plugin.CustomPlugin` 说明： 文件名.properties 即插件id，也是我们后面要引入时使用的id 类似于：apply plugin&#39;com.android.applicaiton&#39; 文件配置内容：指定具体插件实现类 com.company.plugin.CustomPlugin 自定义插件实现类：CustomPlugin.groovy 1234567891011public class CustomPlugin implements Plugin&lt;Project&gt;&#123; @Override void apply(Project project) &#123; //扩展属性定义 project.extensions.create('pluginSupport', TinkerConfigSupport) // 应用 其他插件,以Tinker为例，等同于build.gradle应用 project.apply plugin: 'com.tencent.tinker.patch' &#125;&#125; 扩展属性定义，由create指定，String类型pluginSupport 1project.extensions.create('pluginSupport', PluginConfig) 注意：子类属性必需初始化，否则异常 子属性定义及构造方法初始化属性 PluginConfig.groovy 12345678910public class PluginConfig &#123; boolean booleanValue String stringValue PluginConfig() &#123; booleanValue = false stringValue = "" &#125; 插件build.gradle配置1234567891011121314151617181920212223//语法插件apply plugin: 'groovy'dependencies &#123; //语法支持 compile gradleApi() compile localGroovy() //插件支持 compile 'com.google.gradle:osdetector-gradle-plugin:1.2.1' compile 'com.android.tools.build:gradle:2.1.0' &#125;sourceSets &#123; main &#123; groovy &#123; srcDir 'src/main/groovy' &#125; resources &#123; srcDir 'src/main/resources' &#125; &#125;&#125; 两个重要方法12project.afterEvaluate 解析gradle配置文件之后执行project.beforeEvaluate 解析之前执行 发布注：发布目录根据需要修改 插件buidl.gradle配置123456789101112131415//发布插件apply plugin: 'maven'uploadArchives &#123; repositories &#123; mavenDeployer &#123; //设置插件的GAV参数 pom.groupId = 'groupId' pom.artifactId = 'artifactId' pom.version = 1.0//指定版本号 //文件发布到本地目录 repository(url: uri('../plugin')) &#125; &#125;&#125; 配置完成后执行（Terminal也可）：Gradle-&gt;build-&gt;uploadArchives 使用需要引入的modulebuild.gradle文件，添加如下代码即可完成引入： 123456buildscript&#123; dependencies&#123; classpath 'groupId:artifactId:1.0' &#125;&#125;apply plugin: 'plugin-custom' 扩展属性配置赋值，build.gradle文件：1234pluginSupport&#123; booleanValue = true; stringValue = "自定义插件扩展属性值"&#125; 参考]]></content>
@@ -70,8 +85,8 @@
       <tags>
         <tag>博客</tag>
         <tag>Hexo</tag>
-        <tag>实战</tag>
         <tag>Next</tag>
+        <tag>实战</tag>
       </tags>
   </entry>
   <entry>
@@ -83,11 +98,11 @@
         <category>Hexo</category>
       </categories>
       <tags>
-        <tag>博客</tag>
         <tag>Git</tag>
+        <tag>博客</tag>
         <tag>Hexo</tag>
-        <tag>Node.js</tag>
         <tag>实战</tag>
+        <tag>Node.js</tag>
         <tag>高级</tag>
       </tags>
   </entry>
@@ -100,11 +115,11 @@
         <category>Hexo</category>
       </categories>
       <tags>
-        <tag>博客</tag>
         <tag>Git</tag>
+        <tag>博客</tag>
         <tag>Hexo</tag>
-        <tag>Node.js</tag>
         <tag>实战</tag>
+        <tag>Node.js</tag>
         <tag>高级</tag>
       </tags>
   </entry>
@@ -117,11 +132,11 @@
         <category>Hexo</category>
       </categories>
       <tags>
-        <tag>博客</tag>
         <tag>Git</tag>
+        <tag>博客</tag>
         <tag>Hexo</tag>
-        <tag>Node.js</tag>
         <tag>实战</tag>
+        <tag>Node.js</tag>
         <tag>中级</tag>
       </tags>
   </entry>
@@ -134,11 +149,11 @@
         <category>Hexo</category>
       </categories>
       <tags>
-        <tag>博客</tag>
         <tag>Git</tag>
+        <tag>博客</tag>
         <tag>Hexo</tag>
-        <tag>Node.js</tag>
         <tag>实战</tag>
+        <tag>Node.js</tag>
         <tag>初级</tag>
       </tags>
   </entry>
@@ -181,8 +196,8 @@
       </categories>
       <tags>
         <tag>Git</tag>
-        <tag>总结</tag>
         <tag>基础</tag>
+        <tag>总结</tag>
       </tags>
   </entry>
   <entry>

@@ -111,20 +111,21 @@
 
 
   
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="总结,实战,组件化,进阶," />
 
 
-<meta name="description" content="真实，靠谱，沉淀">
-<meta name="keywords" content="Hexo, NexT">
-<meta property="og:type" content="website">
-<meta property="og:title" content="1022_zhang&#39;s Blog">
-<meta property="og:url" content="https://tianbozhang.coding.me/tags/基础/index.html">
+<meta name="description" content="背景：市面上已开源的或者已发布的组件化方案，多数都是开发阶段单一工程结构，切换module模式。本质上依然没有达到代码完全隔离的目的，开发与整合测试中的一些痛点还是没有彻底解决 我们的方案：代码完全隔离，互相只能依赖，不可编辑，各模块可以单独运行，也可组合依赖 本文内容为亲自实践并验证之后整理，理解了思路，具体实施方案其实可以有多种，最主要的是自己觉得合适的。">
+<meta name="keywords" content="总结,实战,组件化,进阶">
+<meta property="og:type" content="article">
+<meta property="og:title" content="组件化方案的第三种选择之完全隔离的组件化">
+<meta property="og:url" content="https://tianbozhang.coding.me/the-third-option-of-componentization-scheme.html">
 <meta property="og:site_name" content="1022_zhang&#39;s Blog">
-<meta property="og:description" content="真实，靠谱，沉淀">
+<meta property="og:description" content="背景：市面上已开源的或者已发布的组件化方案，多数都是开发阶段单一工程结构，切换module模式。本质上依然没有达到代码完全隔离的目的，开发与整合测试中的一些痛点还是没有彻底解决 我们的方案：代码完全隔离，互相只能依赖，不可编辑，各模块可以单独运行，也可组合依赖 本文内容为亲自实践并验证之后整理，理解了思路，具体实施方案其实可以有多种，最主要的是自己觉得合适的。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-05-22T03:54:08.185Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="1022_zhang&#39;s Blog">
-<meta name="twitter:description" content="真实，靠谱，沉淀">
+<meta name="twitter:title" content="组件化方案的第三种选择之完全隔离的组件化">
+<meta name="twitter:description" content="背景：市面上已开源的或者已发布的组件化方案，多数都是开发阶段单一工程结构，切换module模式。本质上依然没有达到代码完全隔离的目的，开发与整合测试中的一些痛点还是没有彻底解决 我们的方案：代码完全隔离，互相只能依赖，不可编辑，各模块可以单独运行，也可组合依赖 本文内容为亲自实践并验证之后整理，理解了思路，具体实施方案其实可以有多种，最主要的是自己觉得合适的。">
 
 
 
@@ -133,10 +134,10 @@
 
 
 
-  <link rel="canonical" href="https://tianbozhang.coding.me/tags/基础/"/>
+  <link rel="canonical" href="https://tianbozhang.coding.me/the-third-option-of-componentization-scheme.html"/>
 
 
-  <title>标签: 基础 | 1022_zhang's Blog</title>
+  <title>组件化方案的第三种选择之完全隔离的组件化 | 1022_zhang's Blog</title>
   
 
 
@@ -186,7 +187,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -310,64 +311,323 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>基础<small>标签</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://tianbozhang.coding.me/the-third-option-of-componentization-scheme.html">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tianbo_zhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="1022_zhang's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/git-learning.html" itemprop="url">
-              
-                <span itemprop="name">Git 基础命令</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">组件化方案的第三种选择之完全隔离的组件化</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-01-11T11:50:00+08:00"
-              content="2018-01-11" >
-          01-11
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-22T11:40:00+08:00">2018-05-22</time>
+            
 
-    </header>
-  </article>
+            
+            
 
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/the-third-option-of-componentization-scheme.html" class="leancloud_visitors" data-flag-title="组件化方案的第三种选择之完全隔离的组件化">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">789</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长约 </span>
+                
+                <span title="阅读时长约">0:01</span>
+			  <span class="post-meta-item-text">分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>背景：<br>市面上已开源的或者已发布的组件化方案，多数都是开发阶段单一工程结构，切换module模式。本质上依然没有达到代码完全隔离的目的，开发与整合测试中的一些痛点还是没有彻底解决</p>
+<p>我们的方案：代码完全隔离，互相只能依赖，不可编辑，各模块可以单独运行，也可组合依赖</p>
+<p>本文内容为亲自实践并验证之后整理，理解了思路，具体实施方案其实可以有多种，最主要的是自己觉得合适的。</p>
+<a id="more"></a>
+<h2 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h2><p>最大化隔离，最少代码侵入，最少修改感知</p>
+<ol>
+<li>抛弃开发阶段与发布阶段gradle配置的Library与Application切换</li>
+<li>每一个组件都是一个独立的工程，组件仍是Library，与开发阶段使用的demo分离。整体工程一并发布。最终只能有一个Application</li>
+<li>组件互相隔离，互相不可编辑，只能使用。Library 发布为jar或aar文件，远程依赖引入</li>
+<li>清单文件配置（所有我们知道的配置）都可以写进Library，最后打包时会自动合并，无需人为干扰。</li>
+<li>gradle扩展配置，manifest 经常变化的配置写进gradle配置文件，减少配置侵入</li>
+<li>业务组件之间依赖后通过路由或其他方式交互（自行选择），功能组件可直接依赖使用</li>
+</ol>
+<h2 id="涉及知识点"><a href="#涉及知识点" class="headerlink" title="涉及知识点"></a>涉及知识点</h2><p><em>仓库以maven为例</em></p>
+<ol>
+<li>Library Maven 配置</li>
+<li>搭建本地Maven仓库</li>
+<li>Manifest动态配置替换</li>
+<li>Gradle插件开发</li>
+<li>组件交互：Arouter，ActivityRouter</li>
+</ol>
+<h2 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h2><p>理解以上所有点，一步一个脚印</p>
+<h3 id="组件交互方案"><a href="#组件交互方案" class="headerlink" title="组件交互方案"></a>组件交互方案</h3><ul>
+<li><a href="https://github.com/alibaba/ARouter" target="_blank" rel="noopener">阿里ARouter 框架</a></li>
+<li><a href="https://github.com/mzule/ActivityRouter" target="_blank" rel="noopener">ActivityRouter</a></li>
+</ul>
+<h3 id="仓库发布方式"><a href="#仓库发布方式" class="headerlink" title="仓库发布方式"></a>仓库发布方式</h3><h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><ul>
+<li><code>jcenter</code></li>
+<li><code>maven</code></li>
+<li>本地私有仓库</li>
+</ul>
+<h3 id="私有仓库搭建"><a href="#私有仓库搭建" class="headerlink" title="私有仓库搭建"></a>私有仓库搭建</h3><p>以下内容足够</p>
+<p><a href="http://geek.csdn.net/news/detail/53459" target="_blank" rel="noopener">拥抱 Android Studio 之四：Maven 仓库使用与私有仓库搭建</a><br><a href="https://yangbo.tech/2015/10/19/distribute-android-library-to-jcetner/" target="_blank" rel="noopener">在Android Studio中发布Library到<code>jCenter</code>公共仓库</a><br><a href="https://www.2cto.com/kf/201701/544616.html" target="_blank" rel="noopener">自建私有Maven 仓库</a></p>
 
       
     </div>
+	
+	
+	<!-- /noindex-->
+	<div class="post-end text-center">
+	<span ><i class="fa fa-signing fa-lg"></i>  完结撒花  <i class="fa fa-signing fa-lg"></i></span>
+	</div>
+	
+	
+    
+    
+    
 
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>tianbo_zhang</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://tianbozhang.coding.me/the-third-option-of-componentization-scheme.html" title="组件化方案的第三种选择之完全隔离的组件化">https://tianbozhang.coding.me/the-third-option-of-componentization-scheme.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" target="_blank" rel="external nofollow">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/总结/" rel="tag"><i class="fa fa-tag"> </i>总结</a>
+          
+            <a href="/tags/实战/" rel="tag"><i class="fa fa-tag"> </i>实战</a>
+          
+            <a href="/tags/组件化/" rel="tag"><i class="fa fa-tag"> </i>组件化</a>
+          
+            <a href="/tags/进阶/" rel="tag"><i class="fa fa-tag"> </i>进阶</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/gradle-custom-configuration.html" rel="next" title="自定义Gradle插件，之扩展Gradle配置">
+                <i class="fa fa-chevron-left"></i> 自定义Gradle插件，之扩展Gradle配置
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
           
 
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
 
   
 
 
 
+
+  
+
+
+
+
+
+ 
+	<div style="text-align:center;">
+     <button class="btn" id="load-disqus" onclick="disqus.load();">加载 Disqus 评论</button>
+	</div>
+ 
+ 
+  
+    <div class="comments" id="comments">
+	
+	  
+       <div id="lv-container" data-id="city" data-uid="MTAyMC8zMzM1OC85OTE0"></div>
+	  
+	 
+	  
+  
+	  
+	  
+       <div id="disqus_thread">
+         <noscript>
+           Please enable JavaScript to view the
+           <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+         </noscript>
+       </div>
+	 
+	  
+	</div>
+ 
+  
 
 
         </div>
@@ -389,8 +649,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -637,6 +906,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#核心思想"><span class="nav-number">1.</span> <span class="nav-text">核心思想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#涉及知识点"><span class="nav-number">2.</span> <span class="nav-text">涉及知识点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实践"><span class="nav-number">3.</span> <span class="nav-text">实践</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#组件交互方案"><span class="nav-number">3.1.</span> <span class="nav-text">组件交互方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#仓库发布方式"><span class="nav-number">3.2.</span> <span class="nav-text">仓库发布方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分类"><span class="nav-number">3.3.</span> <span class="nav-text">分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#私有仓库搭建"><span class="nav-number">3.4.</span> <span class="nav-text">私有仓库搭建</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -790,6 +1075,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.2"></script>
+
+
 
   
 
@@ -802,6 +1091,30 @@
 
   
 
+  
+    <script type="text/javascript">
+	 var disqus = {
+	 load : function disqus(){
+      var disqus_config = function () {
+        this.page.url = 'https://tianbozhang.coding.me/the-third-option-of-componentization-scheme.html';
+        this.page.identifier = 'the-third-option-of-componentization-scheme.html';
+        this.page.title = '组件化方案的第三种选择之完全隔离的组件化';
+      };
+      function loadComments () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://1022-zhang-github-io.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      }
+	  	$('#load-disqus').remove(); 
+		}
+					
+	}
+	  
+      
+        loadComments();
+      
+    </script>
   
 
 
@@ -820,6 +1133,17 @@
 
 
 
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
   
 
 
@@ -989,6 +1313,23 @@
   </script>
 
   
+  <script type="text/javascript">
+  wpac_init = window.wpac_init || [];
+  wpac_init.push({widget: 'Rating', id: 9197,
+    el: 'wpac-rating',
+    color: 'fc6423'
+  });
+  (function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = '//embed.widgetpack.com/widget.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+  })();
+  </script>
+
 
   
 
