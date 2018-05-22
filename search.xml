@@ -9,8 +9,8 @@
         <category>组件化</category>
       </categories>
       <tags>
-        <tag>总结</tag>
         <tag>实战</tag>
+        <tag>总结</tag>
         <tag>组件化</tag>
         <tag>进阶</tag>
       </tags>
@@ -98,8 +98,8 @@
         <category>Hexo</category>
       </categories>
       <tags>
-        <tag>Git</tag>
         <tag>博客</tag>
+        <tag>Git</tag>
         <tag>Hexo</tag>
         <tag>Node.js</tag>
         <tag>实战</tag>
@@ -115,8 +115,8 @@
         <category>Hexo</category>
       </categories>
       <tags>
-        <tag>Git</tag>
         <tag>博客</tag>
+        <tag>Git</tag>
         <tag>Hexo</tag>
         <tag>Node.js</tag>
         <tag>实战</tag>
@@ -132,8 +132,8 @@
         <category>Hexo</category>
       </categories>
       <tags>
-        <tag>Git</tag>
         <tag>博客</tag>
+        <tag>Git</tag>
         <tag>Hexo</tag>
         <tag>Node.js</tag>
         <tag>实战</tag>
@@ -149,8 +149,8 @@
         <category>Hexo</category>
       </categories>
       <tags>
-        <tag>Git</tag>
         <tag>博客</tag>
+        <tag>Git</tag>
         <tag>Hexo</tag>
         <tag>Node.js</tag>
         <tag>实战</tag>
@@ -172,7 +172,7 @@
   </entry>
   <entry>
     <title><![CDATA[应用优化与开发流程]]></title>
-    <url>%2Fapplication.html</url>
+    <url>%2Fapplication-optimization-and-development.html</url>
     <content type="text"><![CDATA[前言：日常开发 代码与资源的优化必不可避，无论是为了提高代码质量还是为了提高用户留存度吾日三省吾身，今天你优化了没真实项目开发优化经历，LeakCannary与Lint 带你飞 优化内存泄露最常见最严重 ：后果不限于 OutOfMemory 持有Activity 与Context引用，生命周期本该短于应用生命周期，该回收的没被回收掉，导致泄露检测手段：最方便leakcanary ，历史悠久的 MIT Handler泄露new Handler 替换为 静态内部类 将持有当前Activity或Context 对象实例化为WeakReference对象 onDestory 时：handler.removeAllMessageAndCallback(null) 高级方案：不可避免的Handler仍采用静态内部类，提供CallBack,独立于使用者,避免Activity与Context直接引用 更高级的方案：可以避免的Handler使用RxJava 单例泄露单例对象持有的Activity 使用WeakReference 、Context 使用ApplicationContext 去除不必要的Activity引用 泄露不止显式的Activity 与context,一旦定义其他对象，且该对象引用了Context或Activity ,却比应用生命周期短，也会发生泄露，比如单例里使用了RecyclerView 此时需要考虑使用WeakReference 持有该对象引用 这时，应该想想可否将其独立出来 Fragment 之间静态属性引用 泄露消灭静态属性 静态属性会一直持有当前Activity或Context引用 Fragment之间通讯可使用接口，Activity实现该接口， onAttach 将Activity转换为接口对象 Activity操作Fragmeng方式不变 高级方案：可使用MVVM ，ViewModel方式 Cursor 等游标、流的关闭数据库操作：增删改查的游标，文件、网络操作流用后close ListonDestory销毁List：clear WebViewonDestory销毁WebView ：removeJavaScript;removeAllView高级方案：多进程 避免原则尽可能保证持有的对象及时被回收，必须使用Activity的采用WeakReference,能使用ApplicationContext的不使用 当前Context其他对象生命周期短于应用的，一旦持有了Context或Activity都有可能发生泄露，尽可能采用WeakReference 代码优化优化的数据结构HashMap 替换为SparseArray 等 枚举、匿名内部类、反射等减少使用 布局，涉及过渡绘制等背景窗体背景，多余背景，减少过渡绘制有效手段 过渡绘制include标签（通常用于公共布局组件）、merge（有效减少层级，但会出现不可控因素，属性失效等问题）、viewsub 减少不必要的层级 控件优化比较突出的：ImageView 与TextView 呈上下左右关系时，优先考虑TextView增加drawable属性，即compoundDrawable 布局设置：drawableLeft ,drawableTop, drawableRight,drawableBoottom图片文字间距使用：drawablePadding 代码设置：setCompoundDrawablesRelativeWithIntrinsicBounds(left，top,right,bottoom) 内存、网络、电池BitMap的回收，应用不可见的监听，减少app被系统关闭的几率 安装包与第三方无用资源，大图，图片适配，减少不必要的图片，png替换为.9,简单图片代码实现优先 lib 文件 开发与测试架构业务、实现分离MVP或MVVM等viewmodel代码规则：命名，方法数，自解释 目的：便于维护 流程测试环节如：用例覆盖，情景覆盖，功能效果与产品需求匹配度等，数据抓取，可考虑以下方案增强 全员测试开发阶段由开发把控，确认主要流程功能完成后打包安排测试，主要为产品确认功能实现情况，及时发现问题，以免后期不断产生功能修改，耽误开发进度 测试阶段除测试外所有相关人员，包括但不限于：前后端开发、产品、项目负责人 上线前最后的问题发现修改阶段，也是最后的问题修改阶段，避免上线前后发生重大问题 测试次数问题修改完一批次之后统一回归，可分为第一轮至第三轮甚至四轮，根据测试及bug情况安排，除第一轮外后续皆主要为回归，最后一轮进行线上环境测试，确认功能与稳定性，正式上线前可考虑发布小范围用户安装包进行用户实际环境测试，俗称灰度 测试用例测试拿到需求之后可编写测试用例，此用例可指导其他人进行功能验证，减少测试人员压力 目的控制bug数量，减少测试费时，尽可能的发现隐藏的问题，避免上线后发生重大事故提升项目质量 数据监控抓取手法可使用Charles,Fiddler等 数据类问题可直接由bug测出人员定位，避免其他人浪费时间定位 版本分离bug分离上线后的bug确认是否为重大bug是否需要修改，一旦确认可下期修改，则可列为后期版本优先修改内容 api数据分离最基本的数据稳定性保持方法api上线时，安装包未必会及时被上传，此时线上环境已经发生变动，而用户所用仍为老版本，一旦数据不兼容，用户无法正常使用 api可根据app的versioncode与平台等多参数进行数据隔离 问题监测主要为稳定性服务 手段包括但不限于：真实用户实时崩溃日志：百度等 内嵌的日志收集上传功能 后台统计与收集 开发阶段的崩溃收集：崩溃截取显示上传功能 开发阶段 编写高质量代码 性能优化手段LeakCanary 内存泄露 findbug bug 、隐藏问题 removed unused resoures 剔除废弃资源 Lint 找出隐藏问题，优化代码，重点关注Performance 如泄露，Correctness,Security 内存泄露监测方法说是监测，是因为在程序运行过程中，当发生泄露，我们的金丝雀可以直接将泄露信息dump出来参考1:LeakCanary官网参考2:LeakCanary中文说明 Gradle配置： debugCompile &apos;com.squareup.leakcanary:leakcanary-android:1.5.4&apos; releaseCompile &apos;com.squareup.leakcanary:leakcanary-android-no- op:1.5.4&apos; Application ： /** * 使用 RefWatcher 监控本该被回收的对象 * LeakCanary.install() 会返回一个预定义的 RefWatcher，同时也会启用一个 ActivityRefWatcher， * 用于自动监控调用 Activity.onDestroy() 之后泄露的 activity。 * @param context * @return */ public static RefWatcher getRefWatcher(Context context) { Application application = (Application) context.getApplicationContext(); return application.refWatcher; } private RefWatcher refWatcher; protected RefWatcher installLeakCanary() { return RefWatcher.DISABLED; } if (LeakCanary.isInAnalyzerProcess(this)) { return; } refWatcher = LeakCanary.install(this); Fragment/** * 使用 RefWatcher 监控 Fragment */ RefWatcher refWatcher = Application.getRefWatcher(getActivity()); refWatcher.watch(this); 详细说明请参考上面贴出的参考链接 Lint 代码资源检测方法参考 这个工具可以提前检测出内存泄露、无用资源、以及一些不规范代码等，需要我们重点关注的点前面以及上面的参考已经详细说明]]></content>
       <categories>
         <category>原创</category>
