@@ -179,8 +179,8 @@
         <category>开发</category>
       </categories>
       <tags>
-        <tag>解决方案</tag>
         <tag>内存泄露</tag>
+        <tag>解决方案</tag>
         <tag>优化</tag>
         <tag>LeakCanery</tag>
         <tag>Lint</tag>
@@ -196,8 +196,8 @@
       </categories>
       <tags>
         <tag>Git</tag>
-        <tag>总结</tag>
         <tag>基础</tag>
+        <tag>总结</tag>
       </tags>
   </entry>
   <entry>
@@ -210,9 +210,9 @@
       </categories>
       <tags>
         <tag>Git</tag>
+        <tag>解决方案</tag>
         <tag>总结</tag>
         <tag>技能</tag>
-        <tag>解决方案</tag>
       </tags>
   </entry>
 </search>
