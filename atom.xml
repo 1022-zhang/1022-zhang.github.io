@@ -368,9 +368,9 @@
     <link href="https://tianbozhang.coding.me/gradle-build-solution.html"/>
     <id>https://tianbozhang.coding.me/gradle-build-solution.html</id>
     <published>2018-01-11T04:00:00.000Z</published>
-    <updated>2018-01-22T01:46:45.759Z</updated>
+    <updated>2018-05-24T10:12:45.969Z</updated>
     
-    <content type="html"><![CDATA[<blockquote><p>前言：</p><p>AndroidStudio 重度用户们，试问，谁没经历过Build乌龟爬一般的耗时煎熬？</p><p>忍无可忍，无须再忍。</p><p>给你一个靠谱、真实有效解决方案，一招直达痛处</p></blockquote><a id="more"></a><h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><p>先看配置后：<img src="https://i.imgur.com/Icggu2c.png" alt=""><br>平均28s，这个跟机器配置，项目大小，修改内容也有关系</p><p>未配置的：<img src="https://i.imgur.com/QTpSN8T.png" alt=""><br> 将近5分钟 ,同等条件！！</p><p>相对来说，减少了不止一大半时间，感觉很爽有木有</p><h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><h3 id="gradle-proerties-文件"><a href="#gradle-proerties-文件" class="headerlink" title="gradle.proerties 文件"></a>gradle.proerties 文件</h3><pre><code>org.gradle.daemon=true  org.gradle.jvmargs=-Xmx2048m -XX:MaxPermSize=512m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8org.gradle.parallel=trueorg.gradle.configureondemand=true</code></pre><h3 id="Android-Studio-setting"><a href="#Android-Studio-setting" class="headerlink" title="Android Studio setting:"></a>Android Studio setting:</h3><p>环境：studio 3.0,win7 64位 16G<br><img src="https://i.imgur.com/LN9ctBn.png" alt=""><br><img src="https://i.imgur.com/I9HSWv6.png" alt=""></p><blockquote><p>参考： <a href="http://www.cnblogs.com/wuyudong/p/5610666.html" target="_blank" rel="noopener">奉上原文，感谢作者</a></p></blockquote>]]></content>
+    <content type="html"><![CDATA[<blockquote><p>前言：</p><p>AndroidStudio 重度用户们，试问，谁没经历过Build乌龟爬一般的耗时煎熬？</p><p>忍无可忍，无须再忍。</p><p>给你一个靠谱、真实有效解决方案，一招直达痛处</p></blockquote><p>深受代码编译运行极慢的困扰的胖友们有福了。以下内容亲自验证并确认有效</p><a id="more"></a><h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><p>先看配置后：<img src="https://i.imgur.com/Icggu2c.png" alt=""><br>平均28s，这个跟机器配置，项目大小，修改内容也有关系</p><p>未配置的：<img src="https://i.imgur.com/QTpSN8T.png" alt=""><br> 将近5分钟 ,同等条件！！</p><p>相对来说，减少了不止一大半时间，感觉很爽有木有</p><h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><h3 id="gradle-proerties-文件"><a href="#gradle-proerties-文件" class="headerlink" title="gradle.proerties 文件"></a>gradle.proerties 文件</h3><pre><code>org.gradle.daemon=true  org.gradle.jvmargs=-Xmx2048m -XX:MaxPermSize=512m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8org.gradle.parallel=trueorg.gradle.configureondemand=true</code></pre><h3 id="Android-Studio-setting"><a href="#Android-Studio-setting" class="headerlink" title="Android Studio setting:"></a>Android Studio setting:</h3><p>环境：studio 3.0,win7 64位 16G<br><img src="https://i.imgur.com/LN9ctBn.png" alt=""><br><img src="https://i.imgur.com/I9HSWv6.png" alt=""></p><blockquote><p>参考： <a href="http://www.cnblogs.com/wuyudong/p/5610666.html" target="_blank" rel="noopener">奉上原文，感谢作者</a></p></blockquote>]]></content>
     
     <summary type="html">
     
@@ -380,6 +380,7 @@
 &lt;p&gt;忍无可忍，无须再忍。&lt;/p&gt;
 &lt;p&gt;给你一个靠谱、真实有效解决方案，一招直达痛处&lt;/p&gt;
 &lt;/blockquote&gt;
+&lt;p&gt;深受代码编译运行极慢的困扰的胖友们有福了。以下内容亲自验证并确认有效&lt;/p&gt;
     
     </summary>
     
