@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://tianbozhang.coding.me/"/>
-  <updated>2018-05-22T04:33:37.958Z</updated>
+  <updated>2018-06-07T03:39:08.676Z</updated>
   <id>https://tianbozhang.coding.me/</id>
   
   <author>
@@ -15,6 +15,44 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Nexus 3.x 搭建本地 Maven 私有仓库</title>
+    <link href="https://tianbozhang.coding.me/nexus-localmaven-repository.html"/>
+    <id>https://tianbozhang.coding.me/nexus-localmaven-repository.html</id>
+    <published>2018-06-07T03:36:01.079Z</published>
+    <updated>2018-06-07T03:39:08.676Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>选择 Maven 的理由：范围最广的</p><p>官方介绍：</p><h3 id="The-free-artifact-repository-with-universal-support-for-popular-formats"><a href="#The-free-artifact-repository-with-universal-support-for-popular-formats" class="headerlink" title="The free artifact repository with universal support for popular formats."></a>The <strong>free</strong> artifact repository with <strong>universal</strong> support for popular formats.</h3><p>10 million developers trust Nexus</p><p>来个全套的，私有仓库搭建–&gt;代码上传–&gt;远程依赖</p></blockquote><p>系统 环境：windows 64</p><p>软件版本：<code>Nexus Respository Manager OSS 3.x</code></p><p><strong>无论安装还是启动，非管理员用户必须以 管理员身份 运行命令行，管理员身份，管理员！重要说三遍</strong><br><a id="more"></a></p><p>安装时提示：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Could not open SCManager.</span><br></pre></td></tr></table></figure><p>不用想了，以管理员身份重新打开命令行吧</p><h2 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h2><p>自行下载安装包 Nexus Repository Manager</p><p>替你们找好 <a href="(https://www.sonatype.com/download-oss-sonatype?hsCtaTracking=920dd7b5-7ef3-47fe-9600-10fecad8aa32%7Cf59d5f10-099f-4c66-a622-0254373f4a92">免费版</a>) 了</p><p><a href="https://www.sonatype.com/download-sonatype-trial?submissionGuid=4d5ac1c9-5897-450b-885a-3aa22b41d3e7" target="_blank" rel="noopener">专业收费版在这</a></p><p>假设，安装包解压路径为<code>D:\IDE\nexus-3.9.0-01-win64\nexus-3.9.0-01</code></p><ol><li>命令：进入解压路径：</li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Windows\system32&gt;cd D:\IDE\nexus-3.9.0-01-win64\nexus-3.9.0-01\bin</span><br></pre></td></tr></table></figure><ul><li>添加全路径到环境变量，直接执行命令</li></ul><ol><li>安装：</li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nexus.exe/install</span><br></pre></td></tr></table></figure><p>当看到下面的提示，恭喜，成了</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Installed service &apos;nexus&apos;.</span><br></pre></td></tr></table></figure><h2 id="仓库服务操作"><a href="#仓库服务操作" class="headerlink" title="仓库服务操作"></a>仓库服务操作</h2><p>只要 想对仓库做些事儿，就得 以管理员身份登录</p><p>下面俩命令挺重要的，记住</p><h3 id="开启服务"><a href="#开启服务" class="headerlink" title="开启服务"></a>开启服务</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nexus.exe/start</span><br></pre></td></tr></table></figure><p>成功提示</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Starting service &apos;nexus&apos;.</span><br></pre></td></tr></table></figure><ol><li>等待大概 5-10 秒左右，启动需要时间</li><li><ul><li>端口号 『8081』</li><li>在浏览器地址栏输入 『你自己的 ip地址:8081』，或者 『<code>localhost:8081</code>』  -</li><li>进入 仓库管理页面</li></ul></li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">localhost:8081</span><br><span class="line">192.168.13.32:8081</span><br></pre></td></tr></table></figure><h3 id="停止服务"><a href="#停止服务" class="headerlink" title="停止服务"></a>停止服务</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nexus.exe/stop</span><br></pre></td></tr></table></figure><p>成功提示如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Stopping service &apos;nexus&apos;.</span><br><span class="line">Service stopped</span><br></pre></td></tr></table></figure></p><p>上面的内容，记不住也没关系</p><h2 id="仓库搭建"><a href="#仓库搭建" class="headerlink" title="仓库搭建"></a>仓库搭建</h2><h3 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h3><p>管理员身份：user: admin pd: admin123，默认的，可以修改密码</p><h3 id="仓库创建"><a href="#仓库创建" class="headerlink" title="仓库创建"></a>仓库创建</h3><p>丢个图：<br><img src="https://i.imgur.com/X1od7aF.png" alt=""><br>既然要 Maven 仓库，当然选择 Maven 了</p><p>可以创建出三种不同类型的仓库<br>再丢个图：<br><img src="https://i.imgur.com/jSjMR69.png" alt=""></p><p>最简单，不用任何配置的当属 hosted ，其他两种自行感受，我们以最简单最直接最快看到结果为目的</p><p><img src="https://i.imgur.com/VuBvyxY.png" alt=""></p><p>仓库名称 不支持中文（废话）</p><p>仓库来了：<br><img src="https://i.imgur.com/D75L0l6.png" alt=""></p><p>点进去，看看 仓库地址吧</p><p><img src="https://i.imgur.com/K23XFBp.png" alt=""></p><p>现在，仓库有了，地址有了，该发布 『远程依赖包』 了</p><h2 id="代码上传"><a href="#代码上传" class="headerlink" title="代码上传"></a>代码上传</h2><h4 id="信息配置"><a href="#信息配置" class="headerlink" title="信息配置"></a>信息配置</h4><p><code>build.gradle</code>文件</p><p>重要信息：repository，pom</p><p>repository 包含：仓库地址，用户信息</p><p>pom 包含 上传到仓库后，我们使用的 『远程依赖 』信息</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">apply plugin: &apos;maven&apos;</span><br><span class="line"></span><br><span class="line">uploadArchives &#123;</span><br><span class="line">    repositories.mavenDeployer &#123;</span><br><span class="line">        repository(url:&quot;http://localhost:8081/repository/Test1/&quot;) &#123;</span><br><span class="line">            authentication(userName:&quot;admin&quot;, password:&quot;admin123&quot;)</span><br><span class="line">        &#125;</span><br><span class="line">        // 以com.android.support:appcompat-v7:25.1.0为对比</span><br><span class="line">        pom.version=&quot;0.0.1&quot; // 对应版本号 25.1.0</span><br><span class="line">        pom.artifactId=&quot;virtualapk&quot; // 对应 appcompat-v7</span><br><span class="line">        pom.groupId=&quot;com.android.support&quot; // com.android.support</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h4 id="上传"><a href="#上传" class="headerlink" title="上传"></a>上传</h4><p>Gradle –&gt; 待上传module –&gt;upload–&gt;uploadArchives</p><p>过程不说了，没啥点</p><p>看结果，丢图</p><p><img src="https://i.imgur.com/y8EDiG5.png" alt=""></p><p>有人说，呀，我配置错了，想删了重新上传，咋办</p><p>别急，看这：<br>选中你的版本号，然后右侧删除，再刷新一下，哦了</p><p><img src="https://i.imgur.com/5ZcnTv0.png" alt=""></p><h2 id="远程依赖"><a href="#远程依赖" class="headerlink" title="远程依赖"></a>远程依赖</h2><p>这里的远程的意思是：不是我本地磁盘里的</p><h3 id="配置-远程仓库地址"><a href="#配置-远程仓库地址" class="headerlink" title="配置 远程仓库地址"></a>配置 远程仓库地址</h3><p>不配这个地址，你就等着吧，默认的远程公共仓库根本没有</p><p>工程.gradle 文件</p><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">allprojects &#123;</span><br><span class="line">    repositories &#123;</span><br><span class="line">       ....</span><br><span class="line">       <span class="comment">//此处的远程仓库地址就是上面上传的地址</span></span><br><span class="line">        maven &#123; url <span class="string">"http://localhost:8081/repository/TEST/"</span> &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>当然，如果只有个别的 module 需要本地仓库 依赖，配到需要的 module 里就好了。</p><h3 id="依赖语法"><a href="#依赖语法" class="headerlink" title="依赖语法"></a>依赖语法</h3><p>跟 正常的远程依赖一样，没区别</p><p><code>implementation &#39;groupId:artifactId:version&#39;</code></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">implementation &apos;com.android.support:virtualapk:0.0.1&apos;</span><br></pre></td></tr></table></figure><p>同步一下</p><p>再验证一下<br><img src="https://i.imgur.com/KOVSvsT.png" alt=""></p><p>jar 包都有了，还能说啥</p><p>补充一句：自己的私有仓库提供给其他人用的话，把localhost 缓存 你自己的ip 地址</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;选择 Maven 的理由：范围最广的&lt;/p&gt;
+&lt;p&gt;官方介绍：&lt;/p&gt;
+&lt;h3 id=&quot;The-free-artifact-repository-with-universal-support-for-popular-formats&quot;&gt;&lt;a href=&quot;#The-free-artifact-repository-with-universal-support-for-popular-formats&quot; class=&quot;headerlink&quot; title=&quot;The free artifact repository with universal support for popular formats.&quot;&gt;&lt;/a&gt;The &lt;strong&gt;free&lt;/strong&gt; artifact repository with &lt;strong&gt;universal&lt;/strong&gt; support for popular formats.&lt;/h3&gt;&lt;p&gt;10 million developers trust Nexus&lt;/p&gt;
+&lt;p&gt;来个全套的，私有仓库搭建–&amp;gt;代码上传–&amp;gt;远程依赖&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;系统 环境：windows 64&lt;/p&gt;
+&lt;p&gt;软件版本：&lt;code&gt;Nexus Respository Manager OSS 3.x&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;无论安装还是启动，非管理员用户必须以 管理员身份 运行命令行，管理员身份，管理员！重要说三遍&lt;/strong&gt;&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Maven" scheme="https://tianbozhang.coding.me/categories/Maven/"/>
+    
+      <category term="解决方案" scheme="https://tianbozhang.coding.me/categories/Maven/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
+    
+    
+      <category term="私有仓库" scheme="https://tianbozhang.coding.me/tags/%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93/"/>
+    
+      <category term="Nexus" scheme="https://tianbozhang.coding.me/tags/Nexus/"/>
+    
+      <category term="Maven" scheme="https://tianbozhang.coding.me/tags/Maven/"/>
+    
+      <category term="远程依赖" scheme="https://tianbozhang.coding.me/tags/%E8%BF%9C%E7%A8%8B%E4%BE%9D%E8%B5%96/"/>
+    
+  </entry>
   
   <entry>
     <title>组件化方案的第三种选择</title>
@@ -38,9 +76,9 @@
       <category term="组件化" scheme="https://tianbozhang.coding.me/categories/android/%E7%BB%84%E4%BB%B6%E5%8C%96/"/>
     
     
-      <category term="实战" scheme="https://tianbozhang.coding.me/tags/%E5%AE%9E%E6%88%98/"/>
-    
       <category term="总结" scheme="https://tianbozhang.coding.me/tags/%E6%80%BB%E7%BB%93/"/>
+    
+      <category term="实战" scheme="https://tianbozhang.coding.me/tags/%E5%AE%9E%E6%88%98/"/>
     
       <category term="组件化" scheme="https://tianbozhang.coding.me/tags/%E7%BB%84%E4%BB%B6%E5%8C%96/"/>
     
@@ -234,9 +272,9 @@
       <category term="Hexo" scheme="https://tianbozhang.coding.me/categories/%E5%8E%9F%E5%88%9B/Hexo/"/>
     
     
-      <category term="博客" scheme="https://tianbozhang.coding.me/tags/%E5%8D%9A%E5%AE%A2/"/>
-    
       <category term="Git" scheme="https://tianbozhang.coding.me/tags/Git/"/>
+    
+      <category term="博客" scheme="https://tianbozhang.coding.me/tags/%E5%8D%9A%E5%AE%A2/"/>
     
       <category term="Hexo" scheme="https://tianbozhang.coding.me/tags/Hexo/"/>
     
@@ -272,9 +310,9 @@
       <category term="Hexo" scheme="https://tianbozhang.coding.me/categories/%E5%8E%9F%E5%88%9B/Hexo/"/>
     
     
-      <category term="博客" scheme="https://tianbozhang.coding.me/tags/%E5%8D%9A%E5%AE%A2/"/>
-    
       <category term="Git" scheme="https://tianbozhang.coding.me/tags/Git/"/>
+    
+      <category term="博客" scheme="https://tianbozhang.coding.me/tags/%E5%8D%9A%E5%AE%A2/"/>
     
       <category term="Hexo" scheme="https://tianbozhang.coding.me/tags/Hexo/"/>
     
@@ -310,9 +348,9 @@
       <category term="Hexo" scheme="https://tianbozhang.coding.me/categories/%E5%8E%9F%E5%88%9B/Hexo/"/>
     
     
-      <category term="博客" scheme="https://tianbozhang.coding.me/tags/%E5%8D%9A%E5%AE%A2/"/>
-    
       <category term="Git" scheme="https://tianbozhang.coding.me/tags/Git/"/>
+    
+      <category term="博客" scheme="https://tianbozhang.coding.me/tags/%E5%8D%9A%E5%AE%A2/"/>
     
       <category term="Hexo" scheme="https://tianbozhang.coding.me/tags/Hexo/"/>
     
@@ -349,9 +387,9 @@
       <category term="Hexo" scheme="https://tianbozhang.coding.me/categories/%E5%8E%9F%E5%88%9B/Hexo/"/>
     
     
-      <category term="博客" scheme="https://tianbozhang.coding.me/tags/%E5%8D%9A%E5%AE%A2/"/>
-    
       <category term="Git" scheme="https://tianbozhang.coding.me/tags/Git/"/>
+    
+      <category term="博客" scheme="https://tianbozhang.coding.me/tags/%E5%8D%9A%E5%AE%A2/"/>
     
       <category term="Hexo" scheme="https://tianbozhang.coding.me/tags/Hexo/"/>
     
@@ -453,9 +491,9 @@
     
       <category term="Git" scheme="https://tianbozhang.coding.me/tags/Git/"/>
     
-      <category term="基础" scheme="https://tianbozhang.coding.me/tags/%E5%9F%BA%E7%A1%80/"/>
-    
       <category term="总结" scheme="https://tianbozhang.coding.me/tags/%E6%80%BB%E7%BB%93/"/>
+    
+      <category term="基础" scheme="https://tianbozhang.coding.me/tags/%E5%9F%BA%E7%A1%80/"/>
     
   </entry>
   
