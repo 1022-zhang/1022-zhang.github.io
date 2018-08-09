@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[Nexus 3.x 搭建本地 Maven 私有仓库]]></title>
     <url>%2Fnexus-localmaven-repository.html</url>
-    <content type="text"><![CDATA[选择 Maven 的理由：范围最广的 官方介绍： The free artifact repository with universal support for popular formats.10 million developers trust Nexus 来个全套的，私有仓库搭建–&gt;代码上传–&gt;远程依赖 系统 环境：windows 64 软件版本：Nexus Respository Manager OSS 3.x 无论安装还是启动，非管理员用户必须以 管理员身份 运行命令行，管理员身份，管理员！重要说三遍 安装时提示： 1Could not open SCManager. 不用想了，以管理员身份重新打开命令行吧 下载安装自行下载安装包 Nexus Repository Manager 替你们找好 免费版) 了 专业收费版在这 假设，安装包解压路径为D:\IDE\nexus-3.9.0-01-win64\nexus-3.9.0-01 命令：进入解压路径： 1C:\Windows\system32&gt;cd D:\IDE\nexus-3.9.0-01-win64\nexus-3.9.0-01\bin 添加全路径到环境变量，直接执行命令 安装： 1nexus.exe/install 当看到下面的提示，恭喜，成了 1Installed service &apos;nexus&apos;. 仓库服务操作只要 想对仓库做些事儿，就得 以管理员身份登录 下面俩命令挺重要的，记住 开启服务1nexus.exe/start 成功提示 1Starting service &apos;nexus&apos;. 等待大概 5-10 秒左右，启动需要时间 端口号 『8081』 在浏览器地址栏输入 『你自己的 ip地址:8081』，或者 『localhost:8081』 - 进入 仓库管理页面 12localhost:8081192.168.13.32:8081 停止服务1nexus.exe/stop 成功提示如下：12Stopping service &apos;nexus&apos;.Service stopped 上面的内容，记不住也没关系 仓库搭建登录管理员身份：user: admin pd: admin123，默认的，可以修改密码 仓库创建丢个图：既然要 Maven 仓库，当然选择 Maven 了 可以创建出三种不同类型的仓库再丢个图： 最简单，不用任何配置的当属 hosted ，其他两种自行感受，我们以最简单最直接最快看到结果为目的 仓库名称 不支持中文（废话） 仓库来了： 点进去，看看 仓库地址吧 现在，仓库有了，地址有了，该发布 『远程依赖包』 了 代码上传信息配置build.gradle文件 重要信息：repository，pom repository 包含：仓库地址，用户信息 pom 包含 上传到仓库后，我们使用的 『远程依赖 』信息 12345678910111213apply plugin: &apos;maven&apos;uploadArchives &#123; repositories.mavenDeployer &#123; repository(url:&quot;http://localhost:8081/repository/Test1/&quot;) &#123; authentication(userName:&quot;admin&quot;, password:&quot;admin123&quot;) &#125; // 以com.android.support:appcompat-v7:25.1.0为对比 pom.version=&quot;0.0.1&quot; // 对应版本号 25.1.0 pom.artifactId=&quot;virtualapk&quot; // 对应 appcompat-v7 pom.groupId=&quot;com.android.support&quot; // com.android.support &#125;&#125; 上传Gradle –&gt; 待上传module –&gt;upload–&gt;uploadArchives 过程不说了，没啥点 看结果，丢图 有人说，呀，我配置错了，想删了重新上传，咋办 别急，看这：选中你的版本号，然后右侧删除，再刷新一下，哦了 远程依赖这里的远程的意思是：不是我本地磁盘里的 配置 远程仓库地址不配这个地址，你就等着吧，默认的远程公共仓库根本没有 工程.gradle 文件 1234567allprojects &#123; repositories &#123; .... //此处的远程仓库地址就是上面上传的地址 maven &#123; url "http://localhost:8081/repository/TEST/" &#125; &#125;&#125; 当然，如果只有个别的 module 需要本地仓库 依赖，配到需要的 module 里就好了。 依赖语法跟 正常的远程依赖一样，没区别 implementation &#39;groupId:artifactId:version&#39; 1implementation &apos;com.android.support:virtualapk:0.0.1&apos; 同步一下 再验证一下 jar 包都有了，还能说啥 补充一句：自己的私有仓库提供给其他人用的话，把localhost 缓存 你自己的ip 地址]]></content>
+    <content type="text"><![CDATA[官方介绍： The free artifact repository with universal support for popular formats.10 million developers trust Nexus 本文操作步骤：私有仓库搭建–&gt;代码上传–&gt;远程依赖使用 系统 环境：windows 64 软件版本：Nexus Respository Manager OSS 3.x 无论安装还是启动，非管理员用户必须以 管理员身份 运行命令行，管理员身份，管理员！重要说三遍 安装时提示： 1Could not open SCManager. 不用想了，以管理员身份重新打开命令行吧 下载安装自行下载安装包 Nexus Repository Manager 替你们找好 免费版) 了 专业收费版在这 假设，安装包解压路径为D:\IDE\nexus-3.9.0-01-win64\nexus-3.9.0-01 命令：进入解压路径： 1C:\Windows\system32&gt;cd D:\IDE\nexus-3.9.0-01-win64\nexus-3.9.0-01\bin 添加全路径到环境变量，直接执行命令 安装： 1nexus.exe/install 当看到下面的提示，恭喜，成了 1Installed service &apos;nexus&apos;. 仓库服务操作只要 想对仓库做些事儿，就得 以管理员身份登录 下面俩命令挺重要的，记住 开启服务1nexus.exe/start 成功提示 1Starting service &apos;nexus&apos;. 等待大概 5-10 秒左右，启动需要时间 端口号 『8081』 在浏览器地址栏输入 『你自己的 ip地址:8081』，或者 『localhost:8081』 - 进入 仓库管理页面 12localhost:8081192.168.13.32:8081 停止服务1nexus.exe/stop 成功提示如下：12Stopping service &apos;nexus&apos;.Service stopped 上面的内容，记不住也没关系 仓库搭建登录管理员身份：user: admin pd: admin123，默认的，可以修改密码 仓库创建丢个图：既然要 Maven 仓库，当然选择 Maven 了 可以创建出三种不同类型的仓库再丢个图： 最简单，不用任何配置的当属 hosted ，其他两种自行感受，我们以最简单最直接最快看到结果为目的 仓库名称 不支持中文（废话） 仓库来了： 点进去，看看 仓库地址吧 现在，仓库有了，地址有了，该发布 『远程依赖包』 了 代码上传信息配置build.gradle文件 重要信息：repository，pom repository 包含：仓库地址，用户信息 pom 包含 上传到仓库后，我们使用的 『远程依赖 』信息 12345678910111213apply plugin: &apos;maven&apos;uploadArchives &#123; repositories.mavenDeployer &#123; repository(url:&quot;http://localhost:8081/repository/Test1/&quot;) &#123; authentication(userName:&quot;admin&quot;, password:&quot;admin123&quot;) &#125; // 以com.android.support:appcompat-v7:25.1.0为对比 pom.version=&quot;0.0.1&quot; // 对应版本号 25.1.0 pom.artifactId=&quot;virtualapk&quot; // 对应 appcompat-v7 pom.groupId=&quot;com.android.support&quot; // com.android.support &#125;&#125; 上传Gradle –&gt; 待上传module –&gt;upload–&gt;uploadArchives 过程不说了，没啥点 看结果，丢图 有人说，呀，我配置错了，想删了重新上传，咋办 别急，看这：选中你的版本号，然后右侧删除，再刷新一下，哦了 远程依赖这里的远程的意思是：不是我本地磁盘里的 配置 远程仓库地址不配这个地址，你就等着吧，默认的远程公共仓库根本没有 工程.gradle 文件 1234567allprojects &#123; repositories &#123; .... //此处的远程仓库地址就是上面上传的地址 maven &#123; url "http://localhost:8081/repository/TEST/" &#125; &#125;&#125; 当然，如果只有个别的 module 需要本地仓库 依赖，配到需要的 module 里就好了。 依赖语法跟 正常的远程依赖一样，没区别 implementation &#39;groupId:artifactId:version&#39; 1implementation &apos;com.android.support:virtualapk:0.0.1&apos; 同步一下 再验证一下 jar 包都有了，还能说啥 补充一句：自己的私有仓库提供给其他人用的话，把localhost 缓存 你自己的ip 地址]]></content>
       <categories>
         <category>Maven</category>
         <category>解决方案</category>
@@ -24,8 +24,8 @@
         <category>组件化</category>
       </categories>
       <tags>
-        <tag>总结</tag>
         <tag>实战</tag>
+        <tag>总结</tag>
         <tag>组件化</tag>
         <tag>进阶</tag>
       </tags>
@@ -113,8 +113,8 @@
         <category>Hexo</category>
       </categories>
       <tags>
-        <tag>Git</tag>
         <tag>博客</tag>
+        <tag>Git</tag>
         <tag>Hexo</tag>
         <tag>Node.js</tag>
         <tag>实战</tag>
@@ -130,8 +130,8 @@
         <category>Hexo</category>
       </categories>
       <tags>
-        <tag>Git</tag>
         <tag>博客</tag>
+        <tag>Git</tag>
         <tag>Hexo</tag>
         <tag>Node.js</tag>
         <tag>实战</tag>
@@ -147,8 +147,8 @@
         <category>Hexo</category>
       </categories>
       <tags>
-        <tag>Git</tag>
         <tag>博客</tag>
+        <tag>Git</tag>
         <tag>Hexo</tag>
         <tag>Node.js</tag>
         <tag>实战</tag>
@@ -164,8 +164,8 @@
         <category>Hexo</category>
       </categories>
       <tags>
-        <tag>Git</tag>
         <tag>博客</tag>
+        <tag>Git</tag>
         <tag>Hexo</tag>
         <tag>Node.js</tag>
         <tag>实战</tag>
@@ -211,8 +211,8 @@
       </categories>
       <tags>
         <tag>Git</tag>
-        <tag>总结</tag>
         <tag>基础</tag>
+        <tag>总结</tag>
       </tags>
   </entry>
   <entry>
